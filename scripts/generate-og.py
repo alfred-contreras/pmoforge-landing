@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
-Genera la imagen Open Graph (1200×627) para que LinkedIn / WhatsApp / Twitter
-muestren preview cuando se comparta el enlace de PMOforge. Se guarda en public/og.png.
+Genera las imágenes Open Graph (1200×627) — una por idioma — para que
+LinkedIn / WhatsApp / Twitter muestren preview cuando se comparta cada
+versión del enlace de PMOforge. Se guardan en:
+    public/og.png      → versión ES (default)
+    public/og-en.png   → versión EN
 
 Uso:
     python3 scripts/generate-og.py
@@ -55,16 +58,41 @@ def draw_layer_box(d, x, y, w, h, label, color):
     d.text((x + 14, y + 8), label, font=font(F_SANS_BOLD, 13), fill=color)
 
 
-def make_image(out_path: Path):
+COPY = {
+    'es': {
+        'h1_l1': 'Forja tu PMO con',
+        'h1_l2': 'agentes IA que',
+        'h1_l3': 'sí ejecutan',
+        'subtitle': 'Agentes jerárquicos sobre OpenClaw  ·  PMI / SAFe',
+        'cta': 'ACCESO ANTICIPADO',
+        'layer_command': 'MANDO',
+        'layer_supervision': 'SUPERVISIÓN',
+        'layer_operational': 'OPERATIVOS',
+    },
+    'en': {
+        'h1_l1': 'Forge your PMO with',
+        'h1_l2': 'hierarchical AI',
+        'h1_l3': 'agents that ship',
+        'subtitle': 'Agentic AI on OpenClaw  ·  PMI / SAFe ready',
+        'cta': 'EARLY ACCESS',
+        'layer_command': 'COMMAND',
+        'layer_supervision': 'SUPERVISION',
+        'layer_operational': 'OPERATIONAL',
+    },
+}
+
+
+def make_image(out_path: Path, lang: str = 'es'):
+    t = COPY[lang]
     img = Image.new("RGB", (W, H), INK_900)
     d = ImageDraw.Draw(img)
 
     # Fondo gradiente
     for y in range(H):
-        t = y / H
-        r = int(INK_900[0] + (INK_700[0] - INK_900[0]) * t * 0.4)
-        g = int(INK_900[1] + (INK_700[1] - INK_900[1]) * t * 0.4)
-        b = int(INK_900[2] + (INK_700[2] - INK_900[2]) * t * 0.4)
+        ratio = y / H
+        r = int(INK_900[0] + (INK_700[0] - INK_900[0]) * ratio * 0.4)
+        g = int(INK_900[1] + (INK_700[1] - INK_900[1]) * ratio * 0.4)
+        b = int(INK_900[2] + (INK_700[2] - INK_900[2]) * ratio * 0.4)
         d.line([(0, y), (W, y)], fill=(r, g, b))
 
     # Decoración: diagonal acento esquina superior derecha
@@ -83,23 +111,22 @@ def make_image(out_path: Path):
            font=font(F_SANS_BOLD, 44), fill=WHITE)
 
     # Headline (serif)
-    d.text((80, 180), "Forja tu PMO con",
+    d.text((80, 180), t['h1_l1'],
            font=font(F_SERIF_BOLD, 54), fill=WHITE)
-    d.text((80, 244), "agentes IA que",
+    d.text((80, 244), t['h1_l2'],
            font=font(F_SERIF_BOLD, 54), fill=WHITE)
-    d.text((80, 308), "sí ejecutan",
+    d.text((80, 308), t['h1_l3'],
            font=font(F_SERIF_BOLD, 54), fill=ACCENT_LIGHT)
 
     # Línea acento
     d.rectangle([(80, 380), (200, 388)], fill=ACCENT)
 
     # Subtitle / sectores
-    d.text((80, 410),
-           "Agentes jerárquicos sobre OpenClaw  ·  PMI / SAFe",
+    d.text((80, 410), t['subtitle'],
            font=font(F_SANS_REG, 22), fill=INK_100)
 
     # CTA / etiqueta inferior
-    d.text((80, H - 110), "ACCESO ANTICIPADO",
+    d.text((80, H - 110), t['cta'],
            font=font(F_SANS_BOLD, 14), fill=ACCENT)
     d.text((80, H - 80), "pmoforge-landing.vercel.app",
            font=font(F_SANS_BOLD, 26), fill=WHITE)
@@ -109,7 +136,7 @@ def make_image(out_path: Path):
     base_y = 130
 
     # Capa 1 — Mando
-    draw_layer_box(d, base_x, base_y, 380, 90, "MANDO", INK_500)
+    draw_layer_box(d, base_x, base_y, 380, 90, t['layer_command'], INK_500)
     d.ellipse([(base_x + 160, base_y + 18), (base_x + 220, base_y + 78)], fill=ACCENT)
     d.text((base_x + 175, base_y + 32), "PMP",
            font=font(F_SANS_BOLD, 18), fill=WHITE)
@@ -119,7 +146,7 @@ def make_image(out_path: Path):
            fill=(204, 213, 224), width=2)
 
     # Capa 2 — Supervisión
-    draw_layer_box(d, base_x, base_y + 110, 380, 80, "SUPERVISIÓN", ACCENT_LIGHT)
+    draw_layer_box(d, base_x, base_y + 110, 380, 80, t['layer_supervision'], ACCENT_LIGHT)
     d.rounded_rectangle(
         [(base_x + 130, base_y + 140), (base_x + 250, base_y + 180)],
         radius=8, fill=INK_700
@@ -133,7 +160,7 @@ def make_image(out_path: Path):
                fill=(204, 213, 224), width=1)
 
     # Capa 3 — Operativos
-    draw_layer_box(d, base_x, base_y + 215, 380, 110, "OPERATIVOS", INK_500)
+    draw_layer_box(d, base_x, base_y + 215, 380, 110, t['layer_operational'], INK_500)
     agents = [("RAID", base_x + 30), ("Status", base_x + 130),
               ("Minuta", base_x + 250), ("Deps", base_x + 350)]
     for label, ax in agents:
@@ -154,5 +181,5 @@ def make_image(out_path: Path):
 
 if __name__ == "__main__":
     here = Path(__file__).resolve().parent.parent
-    out = here / "public" / "og.png"
-    make_image(out)
+    make_image(here / "public" / "og.png", lang='es')
+    make_image(here / "public" / "og-en.png", lang='en')

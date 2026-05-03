@@ -11,7 +11,7 @@ interface Props {
 const { title, description, lang } = Astro.props;
 
 const SITE = 'https://pmoforge-landing.vercel.app';
-const OG_IMAGE = `${SITE}/og.png`;
+const OG_IMAGE = lang === 'en' ? `${SITE}/og-en.png` : `${SITE}/og.png`;
 const canonical = lang === 'en' ? `${SITE}/en/` : `${SITE}/`;
 ---
 
