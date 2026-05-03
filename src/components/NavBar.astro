@@ -1,0 +1,32 @@
+---
+import type { Lang } from '../data/content';
+import { getContent } from '../data/content';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getContent(lang);
+const altLang: Lang = lang === 'es' ? 'en' : 'es';
+const altHref = altLang === 'en' ? '/en/' : '/';
+---
+
+<header class="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-ink-100">
+  <nav class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
+    <a href={lang === 'en' ? '/en/' : '/'} class="flex items-center gap-2 font-serif font-bold text-lg text-ink-900">
+      <span class="inline-block w-7 h-7 rounded-md bg-gradient-to-br from-ember-500 to-ember-700 grid place-items-center text-white text-sm">⚒</span>
+      PMOforge
+    </a>
+    <ul class="hidden md:flex items-center gap-7 text-sm text-ink-700">
+      <li><a href="#problem" class="hover:text-ember-600">{t.nav.problem}</a></li>
+      <li><a href="#solution" class="hover:text-ember-600">{t.nav.solution}</a></li>
+      <li><a href="#use-cases" class="hover:text-ember-600">{t.nav.useCases}</a></li>
+      <li><a href="#founder" class="hover:text-ember-600">{t.nav.founder}</a></li>
+    </ul>
+    <div class="flex items-center gap-2">
+      <a href={altHref}
+         class="text-xs font-semibold uppercase rounded-md border border-ink-200 px-2 py-1 text-ink-700 hover:bg-ink-50">
+        {altLang.toUpperCase()}
+      </a>
+      <a href="#waitlist" class="btn-primary text-sm py-2 px-4">{t.nav.waitlist}</a>
+    </div>
+  </nav>
+</header>
