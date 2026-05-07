@@ -1,0 +1,40 @@
+---
+// Smooth scroll con Lenis. Animación más larga y curva más cinematográfica
+// que en el CV — la landing es comercial, queremos una experiencia premium.
+---
+
+<script>
+  import Lenis from 'lenis';
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reducedMotion) {
+    const lenis = new Lenis({
+      duration: 1.4,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -12 * t)),
+      orientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.6
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const a = target.closest('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!a) return;
+      const id = a.getAttribute('href');
+      if (!id || id === '#') return;
+      const el = document.querySelector(id) as HTMLElement | null;
+      if (el) {
+        e.preventDefault();
+        lenis.scrollTo(el, { offset: -64, duration: 1.6 });
+      }
+    });
+  }
+</script>

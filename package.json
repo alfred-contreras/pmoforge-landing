@@ -11,14 +11,21 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^4.4.0",
     "@astrojs/tailwind": "^6.0.2",
     "@fontsource-variable/fraunces": "^5.2.7",
     "@fontsource-variable/inter": "^5.2.7",
     "@vercel/analytics": "^2.0.1",
     "astro": "^5.16.5",
+    "framer-motion": "^12.24.4",
+    "lenis": "^1.1.20",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "tailwindcss": "^3.4.18"
   },
   "devDependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
     "typescript": "^5.7.3"
   }
 }

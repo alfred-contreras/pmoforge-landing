@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
+import SmoothScroll from '../components/SmoothScroll.astro';
 
 interface Props {
   title: string;
@@ -43,5 +44,6 @@ const canonical = lang === 'en' ? `${SITE}/en/` : `${SITE}/`;
       {lang === 'en' ? 'Skip to content' : 'Saltar al contenido'}
     </a>
     <slot />
+    <SmoothScroll />
   </body>
 </html>

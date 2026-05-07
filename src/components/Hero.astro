@@ -1,6 +1,7 @@
 ---
 import type { Lang } from '../data/content';
 import { getContent, calendlyUrl } from '../data/content';
+import MagneticButton from './MagneticButton.tsx';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -25,8 +26,12 @@ const labels = {
           {t.subtitle}
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#waitlist" class="btn-primary">{t.ctaPrimary} →</a>
-          <a href={calendlyUrl} target="_blank" rel="noopener" class="btn-ghost">{t.ctaSecondary}</a>
+          <MagneticButton client:load href="#waitlist" className="btn-primary">
+            {t.ctaPrimary} →
+          </MagneticButton>
+          <MagneticButton client:load href={calendlyUrl} external strength={0.18} className="btn-ghost">
+            {t.ctaSecondary}
+          </MagneticButton>
         </div>
       </div>
 
