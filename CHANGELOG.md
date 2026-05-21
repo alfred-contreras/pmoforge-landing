@@ -8,6 +8,18 @@ Convención adoptada el 2026-05-20 (decisión D5 en `DECISIONS.md` del monorepo 
 
 ## [Unreleased]
 
+## [0.4.3] — 2026-05-21
+
+> Dos cambios en una release: (a) fix del archivo `public/photo.jpg` que quedó untracked en v0.4.2; (b) ajuste de layout de la sección Founder por pedido del usuario — título y eyebrow pasan a full-width arriba, foto queda incrustada debajo del título al lado del párrafo.
+
+### Fixed
+
+- **`public/photo.jpg` no fue committeado en v0.4.2.** El archivo existía localmente cuando se editó `Founder.astro` pero no se incluyó en el `git add` del commit `77216d7` por estar en estado untracked (no modified). Resultado en producción: la imagen renderizaba el atributo `alt` ("Retrato de Alfredo Contreras, fundador de PMOforge") porque `/photo.jpg` devolvía 404 en Vercel. Fix: `git add public/photo.jpg` + commit + tag `v0.4.3`. Lección para próximos releases: validar `git status` post-add (verificar que `Untracked files` esté vacío) antes de commitear cuando hay archivos nuevos.
+
+### Changed
+
+- **Layout de `Founder.astro` reorganizado:** el eyebrow y el título pasan a **full-width arriba** (en su propio bloque con `max-w-4xl`), y debajo el grid 3+5+4 acomoda foto + párrafo + certificaciones lado a lado. Antes el título compartía columna con el párrafo (md:col-span-5 al lado de la foto); ahora el título tiene jerarquía visual propia atravesando el ancho de "foto + texto" y la foto queda incrustada **debajo del título al lado del párrafo**. `items-start` en el grid del cuerpo (antes `items-center`) — la altura del párrafo es menor que la de la foto, y `items-start` ancla los tres bloques al tope sin hacer flotar la card de certificaciones.
+
 ## [0.4.2] — 2026-05-21
 
 > Sección Fundador rediseñada: foto del fundador a la izquierda con encuadre profesional (opción C — tarjeta `rounded-2xl` + capa decorativa `ember-200` desplazada en diagonal para profundidad), layout reorganizado a 3 columnas (foto · texto · certificaciones) con `items-center` para simetría vertical. Título reescrito para no redundar con las certificaciones de la columna derecha.
@@ -156,7 +168,8 @@ Despliegue público inicial de la landing PMOforge en Vercel (`pmoforge-landing.
 
 ---
 
-[Unreleased]: https://github.com/alfred-contreras/pmoforge-landing/compare/v0.4.2...HEAD
+[Unreleased]: https://github.com/alfred-contreras/pmoforge-landing/compare/v0.4.3...HEAD
+[0.4.3]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.4.3
 [0.4.2]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.4.2
 [0.4.1]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.4.1
 [0.4.0]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.4.0

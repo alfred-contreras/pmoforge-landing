@@ -9,7 +9,16 @@ const t = getContent(lang).founder;
 
 <section id="founder">
   <div class="max-w-6xl mx-auto px-5 py-20">
-    <div class="grid md:grid-cols-12 gap-8 md:gap-10 items-center">
+    <!-- Encabezado: eyebrow + título full-width -->
+    <div class="max-w-4xl">
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h2 class="mt-3 text-3xl md:text-4xl font-bold text-ink-900 leading-tight">
+        {t.title}
+      </h2>
+    </div>
+
+    <!-- Cuerpo: foto + párrafo + certificaciones (3+5+4) -->
+    <div class="mt-10 grid md:grid-cols-12 gap-8 md:gap-10 items-start">
       <!-- Foto con encuadre opción C: tarjeta + capa decorativa ember-200 desplazada -->
       <div class="md:col-span-3">
         <div class="relative max-w-[280px] md:max-w-none mx-auto">
@@ -31,13 +40,9 @@ const t = getContent(lang).founder;
         </div>
       </div>
 
-      <!-- Texto del fundador -->
+      <!-- Párrafo + CV link -->
       <div class="md:col-span-5">
-        <span class="eyebrow">{t.eyebrow}</span>
-        <h2 class="mt-3 text-3xl md:text-4xl font-bold text-ink-900 leading-tight">
-          {t.title}
-        </h2>
-        <p class="mt-5 text-lg text-ink-700 leading-relaxed">{t.body}</p>
+        <p class="text-lg text-ink-700 leading-relaxed">{t.body}</p>
         <a
           href={t.cvUrl}
           target="_blank"
