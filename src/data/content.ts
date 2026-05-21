@@ -15,7 +15,9 @@ const es = {
     problem: 'El problema',
     solution: 'La solución',
     value: 'Por qué PMOforge',
-    competitive: 'Comparativa',
+    competitive: 'Diferencial',
+    security: 'Seguridad',
+    vision: 'Visión',
     useCases: 'Casos de uso',
     preview: 'Vista del producto',
     founder: 'Fundador',
@@ -72,8 +74,8 @@ const es = {
         body: 'Riesgos, supuestos, dependencias e issues escritos al inicio del proyecto que nadie revisa hasta que el riesgo se materializa.'
       },
       {
-        title: 'Frameworks PMI/SAFe rígidos',
-        body: 'O cumples a rajatabla y matas la velocidad, o flexibilizas y pierdes auditabilidad. Tu organización demanda ambas cosas a la vez.'
+        title: 'Gobernanza vs Agilidad: la fricción que mata el valor',
+        body: 'Endurecer PMI/SAFe burocratiza el proceso y frena la entrega de incrementos; flexibilizarlo recupera ritmo pero pierde visibilidad institucional. PMOforge elimina la disonancia: automatiza el cumplimiento metodológico para que el equipo se concentre en iterar e inyectar valor real en cada ciclo.'
       },
       {
         title: 'Decisiones sin trazabilidad',
@@ -176,31 +178,31 @@ const es = {
     closer: 'Esto es lo que recibe un PMO sénior cuando elige PMOforge: ingeniería de software seria detrás de la IA, no un chatbot bonito. Audítalo, no nos creas.'
   },
   competitive: {
-    eyebrow: 'Cómo te diferencias',
+    eyebrow: 'Diferencial',
     title: 'PMOforge es categoría nueva, no incremento sobre lo que existe',
-    lead: 'Los copilotos verticales (Rovo, Copilot, Asana AI) son asistentes individuales atados a un ecosistema. La IA conversacional directa (ChatGPT, Claude, Gemini) exige al PM subir el contexto cada vez, sin memoria del proyecto. PMOforge orquesta un equipo de agentes con jerarquía, memoria persistente, auditoría interna y determinismo matemático — sin atadura a una única plataforma. No es comparable uno a uno; es deliberado.',
+    lead: 'Los copilotos verticales (Rovo, Copilot, Asana AI) maduraron en 2026 y cerraron varios gaps clásicos. La IA conversacional directa (ChatGPT, Claude, Gemini) exige al PM subir el contexto cada vez. PMOforge se diferencia por la intersección de cinco condiciones que nadie cubre simultáneamente: agente único de cara al PM, EVM y CPM con determinismo Python verificable, Auditor LLM por rúbrica configurable, baseline PMI inmutable y foco vertical IT real sin lock-in a un único ecosistema.',
     columns: ['PMOforge', 'Atlassian Rovo', 'MS Copilot for Project', 'Asana AI Teammates'],
     rows: [
       {
         axis: 'Coordinación multiagente con paralelismo real',
         values: [
           'Sí — equipo de 9 agentes con jerarquía, supervisión y memoria compartida',
-          'Asistente único conversacional sobre Jira/Confluence',
-          'Copilots aislados por app (Project, Teams, Outlook) sin coordinación entre sí',
-          'Teammates individuales por tarea, sin jerarquía ni memoria cross-proyecto'
+          'Multi-agente jerárquico (Hybrid Orchestrator + Rovo Studio); sin Auditor LLM por rúbrica, sin baseline PMI formal del proyecto',
+          'Coordinación vía plano de control externo (Agent 365 + A2A); EVM solo en Project Pro desktop con Plan 5 EOL mayo 2026 y Project Online retirando sep 2026',
+          '21 teammates pre-construidos con memoria cross-project en Work Graph; el PM elige qué teammate llamar (no hay agente único orquestador)'
         ]
       },
       {
         axis: 'EVM con determinismo matemático (CPI/SPI/EAC/ETC)',
-        values: ['Sí, cálculo verificable', 'No', 'Parcial vía MS Project, sin garantía determinista', 'No']
+        values: ['Sí, cálculo Python verificable', 'No', 'Solo en Project Pro desktop, sin garantía determinista', 'No']
       },
       {
-        axis: 'Auditor automático de artefactos con rúbricas configurables',
-        values: ['Sí, agente dedicado', 'No', 'No', 'No']
+        axis: 'Auditor LLM de artefactos con rúbricas configurables',
+        values: ['Sí, agente dedicado', 'No (Rovo Studio audita ejecución, no contenido)', 'No (Agent 365 gobierna agentes, no juzga artefactos)', 'No (Compliance Specialist no es capa obligatoria)']
       },
       {
         axis: 'Líneas base inmutables con flujo de aprobación PMI formal',
-        values: ['Sí, gobierno PMI integrado', 'No', 'Vía MS Project, sin trazabilidad de aprobación nativa', 'No']
+        values: ['Sí, gobierno PMI integrado', 'No para el baseline del proyecto', 'Vía MS Project, sin trazabilidad de aprobación nativa', 'No']
       },
       {
         axis: 'Foco vertical en PM de TI (no feature lateral)',
@@ -212,7 +214,79 @@ const es = {
         ]
       }
     ],
-    note: 'Comparativa basada en documentación pública de cada producto a mayo de 2026. PMOforge se encuentra en fase pre-MVP; las capacidades listadas corresponden a la arquitectura cerrada y validada el 2026-05-19.'
+    note: 'Comparativa basada en documentación pública de cada producto a mayo de 2026 (Atlassian Team \'26, Microsoft Build, Asana Work Innovation Summit). PMOforge se encuentra en fase pre-MVP; las capacidades listadas corresponden a la arquitectura cerrada y validada el 2026-05-19.',
+    ppm: {
+      title: '¿Y frente al PPM enterprise?',
+      body: 'Planview-Sciforma, ServiceNow SPM y Planisware tienen gobernanza enterprise y EVM nativo, pero su capa agéntica recién madura y un piloto típico dura 12 a 18 meses. PMOforge entrega valor en piloto corto con foco vertical IT real, sin lock-in PPM y con Auditor LLM por rúbrica que esa categoría todavía no ofrece.',
+      adjacent: 'El competidor más cercano por foco vertical IT es Forecast.app, pero opera en Professional Services Automation, no en gobernanza PMO con baseline inmutable.'
+    }
+  },
+  security: {
+    eyebrow: 'Seguridad y gobernanza',
+    title: 'Seguridad por diseño, no como feature añadido',
+    lead: 'El Coordinador opera bajo un contrato declarativo: lo que puede hacer está enumerado y lo que no puede hacer está prohibido por estructura, no solo por instrucción. Multi-tenant con aislamiento lógico, defensas contra prompt injection y audit log inmutable desde el día cero.',
+    pillars: [
+      {
+        title: 'Contrato del Coordinador',
+        body: 'Propósito acotado a orquestar 8 agentes sobre el proyecto activo. Lista blanca de capacidades autorizadas y lista negra explícita: sin web abierto, sin código arbitrario fuera de sandbox, sin acceso cross-tenant, sin bypass del Auditor de Calidad, sin bypass del flujo de re-baseline.'
+      },
+      {
+        title: 'Jerarquía de instrucciones en 6 niveles',
+        body: 'System prompt > configuración del tenant > configuración del proyecto > mensajes del PM > artefactos de agentes internos > contenido ingerido (docs del cliente, RFPs, minutas). Un PDF subido al Repositorio nunca puede instruir al Coordinador — se trata como dato, jamás como orden.'
+      },
+      {
+        title: 'Defensas contra prompt injection',
+        body: 'Clasificador de propósito previo al Coordinador que descarta solicitudes fuera de contrato; LLM-as-Judge sobre contenido ingerido para detectar instrucciones embebidas; output filter previo a entrega al PM; audit log de cada intento fuera de alcance.'
+      },
+      {
+        title: 'Aislamiento multi-tenant y multi-proyecto',
+        body: 'Default deny en todo acceso. Contexto cero entre proyectos. Memoria persistente con clave (tenant, proyecto, usuario), nunca solo por usuario. Embeddings vectoriales segregados por proyecto, no únicamente por tenant.'
+      },
+      {
+        title: 'Auditabilidad inmutable',
+        body: 'Append-only log de artefactos, decisiones del Auditor de Calidad, prompts del Coordinador y eventos de seguridad. Retención mínima de un año, configurable por tenant. Acceso restringido a Auditor humano + Director PMO.'
+      }
+    ],
+    closer: 'Documento técnico del modelo de seguridad disponible para Directores PMO, CISOs y compradores enterprise.',
+    cta: 'Agenda 30 min para revisarlo',
+    note: 'Modelo de seguridad v0.1 baseline declarativo (2026-05-21). La v1.0 ampliada incluye diseño implementable, matriz RBAC × proyecto, mapeo OWASP LLM Top 10 y plan de pruebas adversariales pre-piloto.'
+  },
+  vision: {
+    eyebrow: 'Hacia dónde vamos',
+    title: 'Una plataforma que escala más allá de TI',
+    lead: 'PMOforge nace en gestión de proyectos de TI, pero el patrón —Coordinador único + agentes operacionales + tablero compartido + Auditor con rúbricas + memoria persistente + determinismo matemático— es dominio-agnóstico. El producto de hoy es la primera vertical; la plataforma es lo que se está forjando.',
+    horizons: [
+      {
+        label: 'Horizonte 1',
+        period: '0 a 12 meses',
+        title: 'MVP comercial vertical IT',
+        body: 'PMOs internos de TI, telco y consultoría tecnológica. Validación de pricing con primeros clientes, telemetría real de uso, piloto productivo cerrado.'
+      },
+      {
+        label: 'Horizonte 2',
+        period: '12 a 24 meses',
+        title: 'Expansión a industrias ejecutoras de proyectos',
+        body: 'Apertura a sectores no-software con marco PMI común: construcción e infraestructura, manufactura, energía, sector público, banca, salud, educación. Plantillas y rúbricas sectoriales empaquetadas; servicio profesional absorbe la personalización.'
+      },
+      {
+        label: 'Horizonte 3',
+        period: '24 a 36 meses',
+        title: 'Plataforma multi-portafolio',
+        body: 'Vista PMO ejecutiva multi-portafolio (estrategia → portafolio → programa → proyecto). Integración con OKRs y Balanced Scorecard. Marketplace de plugins sectoriales. Modelos multimodales nativos. Modo autónomo asistido con elevación a humano por Red Flags.'
+      }
+    ],
+    roadmap: {
+      title: 'Hoja de ruta visible',
+      lead: 'Cinco hitos de aquí al cierre de año.',
+      items: [
+        { phase: 'mayo 2026', body: 'Pre-MVP en ejecución · arquitectura cerrada · primeros agentes en POC.' },
+        { phase: 'junio 2026', body: 'Demo funcional con caso feliz reproducible · 5-6 agentes coordinados.' },
+        { phase: 'jul–ago 2026', body: 'Piloto remunerado controlado con primer cliente · ciclo completo con fallo recuperado.' },
+        { phase: 'sep–oct 2026', body: 'Integraciones reales · flujo formal de aprobación de re-baseline · sync con repositorios corporativos.' },
+        { phase: 'Q4 2026', body: 'Apertura comercial controlada en SaaS multi-tenant con clientes early-adopter.' }
+      ]
+    },
+    closer: 'Naming, registro de dominio y arquitectura de marca de los productos hermanos están sujetos a trademark check en curso.'
   },
   useCases: {
     eyebrow: 'Casos de uso',
@@ -325,7 +399,9 @@ const en: typeof es = {
     problem: 'The problem',
     solution: 'The solution',
     value: 'Why PMOforge',
-    competitive: 'Comparison',
+    competitive: 'Differentiator',
+    security: 'Security',
+    vision: 'Vision',
     useCases: 'Use cases',
     preview: 'Product preview',
     founder: 'Founder',
@@ -381,8 +457,8 @@ const en: typeof es = {
         body: 'Risks, assumptions, dependencies and issues written at project start that nobody revisits — until the risk materializes.'
       },
       {
-        title: 'Rigid PMI/SAFe frameworks',
-        body: 'Either you comply strictly and kill speed, or you bend the rules and lose auditability. Your organization demands both at once.'
+        title: 'Governance vs Agility: the friction that kills value',
+        body: 'Tightening PMI/SAFe bureaucratizes the process and stalls incremental delivery; loosening it restores pace but loses institutional visibility. PMOforge removes the disconnect: it automates methodological compliance so the team focuses on iterating and injecting real value every cycle.'
       },
       {
         title: 'Decisions without traceability',
@@ -485,31 +561,31 @@ const en: typeof es = {
     closer: 'This is what a senior PMO gets when they pick PMOforge: serious software engineering behind the AI, not a pretty chatbot. Audit it, do not just take our word for it.'
   },
   competitive: {
-    eyebrow: 'How you differentiate',
+    eyebrow: 'Differentiator',
     title: 'PMOforge is a new category, not an increment over what exists',
-    lead: 'Vertical copilots (Rovo, Copilot, Asana AI) are individual assistants tied to one ecosystem. Direct conversational AI (ChatGPT, Claude, Gemini) forces the PM to upload context every time, with no project memory. PMOforge orchestrates a team of agents with hierarchy, persistent memory, internal auditing and mathematical determinism — without lock-in to a single platform. It is not one-to-one comparable; that is deliberate.',
+    lead: 'Vertical copilots (Rovo, Copilot, Asana AI) matured through 2026 and closed several classic gaps. Direct conversational AI (ChatGPT, Claude, Gemini) forces the PM to upload context every time. PMOforge differentiates through the intersection of five conditions no one covers simultaneously: a single agent fronting the PM, EVM and CPM with verifiable deterministic Python, an LLM Auditor with configurable rubrics, an immutable PMI baseline, and real vertical IT focus without lock-in to a single ecosystem.',
     columns: ['PMOforge', 'Atlassian Rovo', 'MS Copilot for Project', 'Asana AI Teammates'],
     rows: [
       {
         axis: 'Multi-agent coordination with real parallelism',
         values: [
           'Yes — team of 9 agents with hierarchy, supervision, and shared memory',
-          'Single conversational assistant on top of Jira/Confluence',
-          'Isolated copilots per app (Project, Teams, Outlook) with no cross-coordination',
-          'Individual teammates per task, no hierarchy or cross-project memory'
+          'Hierarchical multi-agent (Hybrid Orchestrator + Rovo Studio); no LLM Auditor by rubric, no formal PMI baseline of the project',
+          'Coordination via external control plane (Agent 365 + A2A); EVM only in Project Pro desktop with Plan 5 EOL May 2026 and Project Online retiring Sep 2026',
+          '21 pre-built teammates with cross-project memory on Work Graph; the PM picks which teammate to call (no single orchestrating agent)'
         ]
       },
       {
         axis: 'EVM with mathematical determinism (CPI/SPI/EAC/ETC)',
-        values: ['Yes, verifiable computation', 'No', 'Partial via MS Project, no determinism guarantee', 'No']
+        values: ['Yes, verifiable Python computation', 'No', 'Only in Project Pro desktop, no determinism guarantee', 'No']
       },
       {
-        axis: 'Automatic artifact auditor with configurable rubrics',
-        values: ['Yes, dedicated agent', 'No', 'No', 'No']
+        axis: 'LLM artifact auditor with configurable rubrics',
+        values: ['Yes, dedicated agent', 'No (Rovo Studio audits execution, not content)', 'No (Agent 365 governs agents, does not judge artifacts)', 'No (Compliance Specialist is not a mandatory layer)']
       },
       {
         axis: 'Immutable baselines with formal PMI approval flow',
-        values: ['Yes, PMI governance integrated', 'No', 'Via MS Project, no native approval traceability', 'No']
+        values: ['Yes, PMI governance integrated', 'No for the project baseline', 'Via MS Project, no native approval traceability', 'No']
       },
       {
         axis: 'Vertical focus on IT PM (not a side feature)',
@@ -521,7 +597,79 @@ const en: typeof es = {
         ]
       }
     ],
-    note: 'Comparison based on public documentation of each product as of May 2026. PMOforge is in a pre-MVP phase; capabilities listed correspond to the architecture closed and validated on 2026-05-19.'
+    note: 'Comparison based on public documentation of each product as of May 2026 (Atlassian Team \'26, Microsoft Build, Asana Work Innovation Summit). PMOforge is in a pre-MVP phase; capabilities listed correspond to the architecture closed and validated on 2026-05-19.',
+    ppm: {
+      title: 'What about enterprise PPM?',
+      body: 'Planview-Sciforma, ServiceNow SPM, and Planisware bring enterprise governance and native EVM, but their agentic layer is just maturing and a typical pilot runs 12 to 18 months. PMOforge delivers value in a short pilot with real vertical IT focus, no PPM lock-in, and an LLM Auditor by rubric that the PPM category does not offer yet.',
+      adjacent: 'The closest competitor by real vertical IT focus is Forecast.app, but it operates in Professional Services Automation, not PMO governance with an immutable baseline.'
+    }
+  },
+  security: {
+    eyebrow: 'Security and governance',
+    title: 'Security by design, not as an add-on feature',
+    lead: 'The Coordinator operates under a declarative contract: what it can do is enumerated and what it cannot do is forbidden by structure, not just by instruction. Multi-tenant with logical isolation, defenses against prompt injection, and an immutable audit log from day zero.',
+    pillars: [
+      {
+        title: 'Coordinator contract',
+        body: 'Bounded purpose: orchestrate 8 agents on the active project. Whitelist of authorized capabilities and explicit blacklist: no open web, no arbitrary code outside the sandbox, no cross-tenant access, no bypass of the Quality Auditor, no bypass of the re-baseline flow.'
+      },
+      {
+        title: '6-level instruction hierarchy',
+        body: 'System prompt > tenant config > project config > PM messages > internal agent artifacts > ingested content (client docs, RFPs, minutes). A PDF uploaded to the Repository can never instruct the Coordinator — it is treated as data, never as a command.'
+      },
+      {
+        title: 'Prompt injection defenses',
+        body: 'Purpose classifier ahead of the Coordinator that filters out-of-contract requests; LLM-as-Judge on ingested content to catch embedded instructions; output filter before delivery to the PM; audit log of every out-of-scope attempt.'
+      },
+      {
+        title: 'Multi-tenant and multi-project isolation',
+        body: 'Default deny on every access. Zero context across projects. Persistent memory keyed by (tenant, project, user) — never by user alone. Vector embeddings segregated per project, not only per tenant.'
+      },
+      {
+        title: 'Immutable auditability',
+        body: 'Append-only log of artifacts, Quality Auditor decisions, Coordinator prompts, and security events. Minimum retention of one year, configurable per tenant. Access restricted to the human Auditor + PMO Director.'
+      }
+    ],
+    closer: 'Full security model document available for PMO Directors, CISOs, and enterprise buyers.',
+    cta: 'Book a 30-min call to review it',
+    note: 'Security model v0.1 declarative baseline (2026-05-21). The expanded v1.0 includes implementable design, RBAC × project matrix, OWASP LLM Top 10 mapping, and pre-pilot adversarial testing plan.'
+  },
+  vision: {
+    eyebrow: 'Where we are going',
+    title: 'A platform that scales beyond IT',
+    lead: 'PMOforge is born in IT project management, but the pattern —single Coordinator + operational agents + shared board + Auditor with rubrics + persistent memory + mathematical determinism— is domain-agnostic. Today\'s product is the first vertical; the platform is what is being forged.',
+    horizons: [
+      {
+        label: 'Horizon 1',
+        period: '0 to 12 months',
+        title: 'Commercial vertical IT MVP',
+        body: 'Internal PMOs in IT, telco, and tech consulting. Pricing validation with first customers, real telemetry of use, productive pilot closed.'
+      },
+      {
+        label: 'Horizon 2',
+        period: '12 to 24 months',
+        title: 'Expansion to project-executing industries',
+        body: 'Opening to non-software sectors with a common PMI framework: construction and infrastructure, manufacturing, energy, public sector, banking, healthcare, education. Packaged sector templates and rubrics; professional services absorbs customization.'
+      },
+      {
+        label: 'Horizon 3',
+        period: '24 to 36 months',
+        title: 'Multi-portfolio platform',
+        body: 'Executive PMO view across multiple portfolios (strategy → portfolio → program → project). Integration with OKRs and Balanced Scorecard. Marketplace of sector plugins. Native multimodal models. Assisted autonomous mode with human escalation on Red Flags.'
+      }
+    ],
+    roadmap: {
+      title: 'Visible roadmap',
+      lead: 'Five milestones from here to year-end.',
+      items: [
+        { phase: 'May 2026', body: 'Pre-MVP in execution · architecture closed · first agents in POC.' },
+        { phase: 'June 2026', body: 'Functional demo with reproducible happy path · 5-6 coordinated agents.' },
+        { phase: 'Jul–Aug 2026', body: 'Paid controlled pilot with first customer · full cycle with recovered failure.' },
+        { phase: 'Sep–Oct 2026', body: 'Real integrations · formal re-baseline approval flow · sync with corporate repositories.' },
+        { phase: 'Q4 2026', body: 'Controlled commercial launch in multi-tenant SaaS with early-adopter customers.' }
+      ]
+    },
+    closer: 'Naming, domain registration, and brand architecture of sibling products are subject to ongoing trademark check.'
   },
   useCases: {
     eyebrow: 'Use cases',

@@ -1,0 +1,68 @@
+---
+import type { Lang } from '../data/content';
+import { getContent } from '../data/content';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getContent(lang).vision;
+---
+
+<section id="vision" class="relative">
+  <div class="max-w-6xl mx-auto px-5 py-20">
+    <span class="eyebrow">{t.eyebrow}</span>
+    <h2 class="mt-3 text-3xl md:text-4xl font-bold text-ink-900 max-w-3xl leading-tight">
+      {t.title}
+    </h2>
+    <p class="mt-5 text-lg text-ink-700 max-w-3xl leading-relaxed">{t.lead}</p>
+
+    <div class="mt-12 grid md:grid-cols-3 gap-5">
+      {t.horizons.map((h, i) => (
+        <article class="card flex flex-col gap-3 relative overflow-hidden">
+          <span
+            class="absolute -top-3 -right-3 inline-grid place-items-center w-14 h-14 rounded-full bg-ember-500 text-white font-serif font-bold text-lg shadow-md"
+            aria-hidden="true"
+          >
+            H{i + 1}
+          </span>
+          <span class="text-xs font-semibold uppercase tracking-wider text-ember-700">
+            {h.label} · {h.period}
+          </span>
+          <h3 class="font-serif font-bold text-xl text-ink-900 leading-snug pr-12">
+            {h.title}
+          </h3>
+          <p class="text-ink-700 leading-relaxed">{h.body}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-14 rounded-2xl border border-ink-100 bg-ink-50/60 p-6 md:p-8">
+      <h3 class="font-serif font-bold text-xl text-ink-900 leading-snug">
+        {t.roadmap.title}
+      </h3>
+      <p class="mt-2 text-ink-700 leading-relaxed">{t.roadmap.lead}</p>
+
+      <ol class="mt-6 space-y-4 md:space-y-0 md:grid md:grid-cols-5 md:gap-4">
+        {t.roadmap.items.map((it, i) => (
+          <li class="relative pl-6 md:pl-0 md:pt-8">
+            <span
+              class="absolute left-0 top-1 md:left-1/2 md:top-0 md:-translate-x-1/2 inline-grid place-items-center w-5 h-5 rounded-full bg-ember-500 text-white text-[10px] font-bold shadow-sm"
+              aria-hidden="true"
+            >
+              {i + 1}
+            </span>
+            <span class="block text-xs font-semibold uppercase tracking-wider text-ember-700 md:text-center">
+              {it.phase}
+            </span>
+            <span class="mt-1 block text-sm text-ink-700 leading-relaxed md:text-center">
+              {it.body}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <p class="mt-10 max-w-3xl text-ink-700 leading-relaxed italic border-l-2 border-ember-500 pl-4">
+      {t.closer}
+    </p>
+  </div>
+</section>

@@ -8,6 +8,29 @@ Convención adoptada el 2026-05-20 (decisión D5 en `DECISIONS.md` del monorepo 
 
 ## [Unreleased]
 
+## [0.4.0] — 2026-05-21
+
+> Dos secciones permanentes nuevas (Seguridad por diseño + Hacia dónde vamos), reescritura completa de la sección competitiva ("Diferencial") con tres celdas actualizadas según cierre de 04-Investigación de mercado v1.0 + sub-bloque "¿Y frente al PPM enterprise?" (Planview-Sciforma, ServiceNow SPM, Planisware, Forecast.app), reescritura del bloque "Frameworks PMI/SAFe rígidos" del Problem como "Gobernanza vs Agilidad: la fricción que mata el valor", roadmap visible más agresivo (junio 2026 demo funcional · jul–ago piloto remunerado · Q4 apertura comercial controlada). Cero filtraciones de Modo Stealth (sin nombres de modelos, providers, ni nombres de productos hermanos en exploración).
+
+### Added
+
+- **Sección nueva `Security.astro` entre `Competitive` y `UseCases`:** cinco pilares del modelo de seguridad del Coordinador (`security-model.md` v0.1) traducidos a lenguaje accesible — contrato declarativo del Coordinador con lista blanca/negra de capacidades, jerarquía de instrucciones en 6 niveles, defensas contra prompt injection (clasificador de propósito + LLM-as-Judge + output filter), aislamiento multi-tenant y multi-proyecto, auditabilidad inmutable. CTA al Calendly del fundador para revisión del documento técnico completo. Bilingüe.
+- **Sección nueva `Vision.astro` entre `UIPreview` y `Founder`:** tres horizontes a 36 meses (MVP comercial vertical IT → expansión a 8 industrias ejecutoras de proyectos → plataforma multi-portafolio + marketplace + multimodal nativo + modo autónomo asistido). Mini-timeline visible con 5 hitos hasta cierre de año (mayo → junio → jul-ago → sep-oct → Q4 2026) que reemplaza el rol que tendría una sección dedicada al alcance del producto sin filtrar nombres de stack. Cierre con disclaimer de trademark check en curso.
+- **Tres entradas nuevas en la navegación:** "Diferencial / Differentiator" (visible md+, reemplazando "Comparativa / Comparison" en label), "Seguridad / Security" (visible md+), "Visión / Vision" (visible md+). Reorganización de breakpoints: "Por qué PMOforge", "Casos de uso" y "Fundador" pasan a `lg+`; "Vista del producto" pasa a `xl+`.
+- **Sub-bloque "¿Y frente al PPM enterprise?" al final de la sección Diferencial:** card con Planview-Sciforma, ServiceNow SPM, Planisware mencionados explícitamente (anillo competitivo 2 según `competitive-landscape-2026.md` §2.2 y §6) + adjacent Forecast.app como competidor más cercano por foco vertical IT real (PSA). Cierra el gap identificado en el cierre 04-Mercado v1.0 punto (3).
+
+### Changed
+
+- **Reescritura completa del lead y de tres celdas de la sección Diferencial** (Atlassian Rovo, MS Copilot for Project, Asana AI Teammates) según cierre 04-Mercado v1.0 (`STATE.md` §1, `competitive-landscape-2026.md` §6, `landing-feedback.md`). Rovo se reframe a "Multi-agente jerárquico (Hybrid Orchestrator + Rovo Studio); sin Auditor LLM por rúbrica, sin baseline PMI formal del proyecto". MS Copilot se reframe a "Coordinación vía plano de control externo (Agent 365 + A2A); EVM solo en Project Pro desktop con Plan 5 EOL mayo 2026 y Project Online retirando sep 2026". Asana se reframe a "21 teammates pre-construidos con memoria cross-project en Work Graph; el PM elige qué teammate llamar (no hay agente único orquestador)". Lead actualizado al frame "intersección de cinco condiciones que nadie cubre simultáneamente". Eyebrow renombrado de "Cómo te diferencias" a "Diferencial".
+- **Celda "Auditor LLM de artefactos con rúbricas configurables" matizada** con justificación explícita en lugar de un escueto "No": Rovo Studio audita ejecución no contenido; Agent 365 gobierna agentes no juzga artefactos; Compliance Specialist de Asana no es capa obligatoria.
+- **Reescritura del tercer bullet de la sección Problem** ("Frameworks PMI/SAFe rígidos" → "Gobernanza vs Agilidad: la fricción que mata el valor"): formulación condensada (~50 palabras) del trade-off PMI estricto vs agilidad, con cierre en "PMOforge automatiza el cumplimiento metodológico para que el equipo se concentre en iterar e inyectar valor real en cada ciclo".
+- **Note de la sección Diferencial:** referencias explícitas a Atlassian Team '26, Microsoft Build y Asana Work Innovation Summit como fuentes de la actualización mayo 2026.
+
+### Diferido a próximas releases
+
+- v0.4.1: D-02 backend real waitlist (Resend + Notion o Formspree); D-05 JSON-LD Organization + SoftwareApplication; D-16 resolución `npm audit`; D-17 optimización del PNG fuente del hero con `pngquant`/`oxipng`.
+- v0.5.0+: D-12 teaser de pricing post-validación Sinapsa; D-13 screenshots reales reemplazan mockup en `UIPreview` cuando Demo 1 sem 6-8 esté funcional; eventual página `/security` con versión pública sanitizada del modelo de seguridad si CISOs lo piden recurrentemente.
+
 ## [0.3.0] — 2026-05-21
 
 > Rediseño visual completo del hero (constelación → capa operativa multiagente con 8 pills + tablero hexagonal), fix del bug de iconos en "Cuatro promesas" (cuadrado negro), fix paralelo de `border-ember-300` en Solution.astro y Waitlist.astro, sección nueva "Vista del producto · en construcción" entre Casos de uso y Fundador, sección nueva "Dos lentes — quién gana qué" entre Solución y Cuatro promesas, copy refinado con 6 mensajes nuevos extraídos del deck Sinapsa v2.0. Cero filtraciones de marca pública (sin nombres de cliente, sin "Sinapsa", sin "Claro", sin "Ecopetrol"). Cero filtraciones de Modo Stealth (sin nombres de modelos, providers, ni cifras unitarias de costo).
@@ -103,7 +126,8 @@ Despliegue público inicial de la landing PMOforge en Vercel (`pmoforge-landing.
 
 ---
 
-[Unreleased]: https://github.com/alfred-contreras/pmoforge-landing/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/alfred-contreras/pmoforge-landing/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.4.0
 [0.3.0]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.3.0
 [0.2.0]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.2.0
 [0.1.0]: https://github.com/alfred-contreras/pmoforge-landing/commit/84236a3
