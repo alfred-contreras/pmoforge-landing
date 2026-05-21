@@ -9,7 +9,7 @@ const t = getContent(lang).founder;
 
 <section id="founder">
   <div class="max-w-6xl mx-auto px-5 py-20">
-    <!-- Encabezado: eyebrow + título full-width -->
+    <!-- Encabezado: eyebrow + título full-width siempre -->
     <div class="max-w-4xl">
       <span class="eyebrow">{t.eyebrow}</span>
       <h2 class="mt-3 text-3xl md:text-4xl font-bold text-ink-900 leading-tight">
@@ -17,14 +17,16 @@ const t = getContent(lang).founder;
       </h2>
     </div>
 
-    <!-- Cuerpo: foto + párrafo + certificaciones (3+5+4) -->
-    <div class="mt-10 grid md:grid-cols-12 gap-8 md:gap-10 items-start">
+    <!-- Cuerpo: foto + párrafo + certificaciones.
+         Mobile: foto (5/12) + párrafo (7/12) lado a lado · certificaciones full-width abajo.
+         md+: foto (3/12) + párrafo (5/12) + certificaciones (4/12) en una sola fila. -->
+    <div class="mt-10 grid grid-cols-12 gap-5 md:gap-10 items-start">
       <!-- Foto con encuadre opción C: tarjeta + capa decorativa ember-200 desplazada -->
-      <div class="md:col-span-3">
-        <div class="relative max-w-[280px] md:max-w-none mx-auto">
+      <div class="col-span-5 md:col-span-3">
+        <div class="relative">
           <!-- Capa decorativa atrás, desplazada -->
           <div
-            class="absolute inset-0 translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4 rounded-2xl bg-ember-200"
+            class="absolute inset-0 translate-x-2 translate-y-2 md:translate-x-4 md:translate-y-4 rounded-2xl bg-ember-200"
             aria-hidden="true"
           ></div>
           <!-- Foto al frente -->
@@ -41,20 +43,20 @@ const t = getContent(lang).founder;
       </div>
 
       <!-- Párrafo + CV link -->
-      <div class="md:col-span-5">
-        <p class="text-lg text-ink-700 leading-relaxed">{t.body}</p>
+      <div class="col-span-7 md:col-span-5">
+        <p class="text-base md:text-lg text-ink-700 leading-relaxed">{t.body}</p>
         <a
           href={t.cvUrl}
           target="_blank"
           rel="noopener"
-          class="mt-6 inline-flex items-center gap-2 font-semibold text-ember-600 hover:text-ember-700"
+          class="mt-5 md:mt-6 inline-flex items-center gap-2 font-semibold text-ember-600 hover:text-ember-700"
         >
           {t.cvLink} →
         </a>
       </div>
 
-      <!-- Card de certificaciones -->
-      <aside class="md:col-span-4 card bg-gradient-to-br from-ember-50 to-white">
+      <!-- Card de certificaciones — full-width abajo en mobile, columna 4/12 en md+ -->
+      <aside class="col-span-12 md:col-span-4 card bg-gradient-to-br from-ember-50 to-white">
         <ul class="space-y-3 text-ink-700">
           <li class="flex items-start gap-3">
             <span class="mt-1 inline-block w-2 h-2 rounded-full bg-ember-500 shrink-0"></span>
