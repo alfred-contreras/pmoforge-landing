@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 import SmoothScroll from '../components/SmoothScroll.astro';
 
 interface Props {
@@ -37,6 +38,7 @@ const canonical = lang === 'en' ? `${SITE}/en/` : `${SITE}/`;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <Analytics />
+    <SpeedInsights />
   </head>
   <body class="min-h-screen">
     <a href="#main"
