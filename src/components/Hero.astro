@@ -8,27 +8,30 @@ const { lang } = Astro.props;
 const t = getContent(lang).hero;
 const g = t.graph;
 
-// Posiciones de los 8 agentes en la "Capa operativa multiagente"
-// Pill 120 x 30, distribución 3-2-3 alrededor del Tablero compartido (hex)
+// 8 agentes — posiciones definidas en CSS por su key
 const agents = [
-  // top row
-  { name: g.agents.onboarder, x: 30,  y: 130, edge: { x: 150, y: 160 }, boardPt: { x: 252, y: 263 }, highlight: false },
-  { name: g.agents.scope,     x: 240, y: 130, edge: { x: 300, y: 160 }, boardPt: { x: 300, y: 235 }, highlight: false },
-  { name: g.agents.schedule,  x: 450, y: 130, edge: { x: 450, y: 160 }, boardPt: { x: 348, y: 263 }, highlight: false },
-  // middle row (sides)
-  { name: g.agents.repo,      x: 30,  y: 275, edge: { x: 150, y: 290 }, boardPt: { x: 245, y: 290 }, highlight: false },
-  { name: g.agents.evm,       x: 450, y: 275, edge: { x: 450, y: 290 }, boardPt: { x: 355, y: 290 }, highlight: false },
-  // bottom row
-  { name: g.agents.risks,     x: 30,  y: 420, edge: { x: 150, y: 420 }, boardPt: { x: 252, y: 318 }, highlight: false },
-  { name: g.agents.minutes,   x: 240, y: 420, edge: { x: 300, y: 420 }, boardPt: { x: 300, y: 345 }, highlight: false },
-  { name: g.agents.auditor,   x: 450, y: 420, edge: { x: 450, y: 420 }, boardPt: { x: 348, y: 318 }, highlight: true  },
+  { key: 'onboarder', name: g.agents.onboarder, highlight: false },
+  { key: 'scope',     name: g.agents.scope,     highlight: false },
+  { key: 'schedule',  name: g.agents.schedule,  highlight: false },
+  { key: 'repo',      name: g.agents.repo,      highlight: false },
+  { key: 'evm',       name: g.agents.evm,       highlight: false },
+  { key: 'minutes',   name: g.agents.minutes,   highlight: false },
+  { key: 'risks',     name: g.agents.risks,     highlight: false },
+  { key: 'auditor',   name: g.agents.auditor,   highlight: true  },
 ];
+
+// Roles humanos (lista para Capa 1)
+const rolesLabel = lang === 'en' ? 'Human roles' : 'Roles humanos';
+const rolesList  = 'PM · ' + (lang === 'en' ? 'PMO Director · CTO · CEO' : 'Director PMO · CTO · CEO');
+const platformAriaLabel = lang === 'en' ? 'Multi-agent operational platform' : 'Plataforma operativa multiagente';
 ---
 
 <section class="relative overflow-hidden">
-  <div class="max-w-6xl mx-auto px-5 pt-16 pb-20 md:pt-24 md:pb-28">
-    <div class="grid md:grid-cols-12 gap-10 items-center">
-      <div class="md:col-span-5">
+  <div class="max-w-6xl mx-auto px-5 pt-16 pb-16 md:pt-24 md:pb-24">
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+      <!-- LEFT: copy -->
+      <div class="lg:col-span-5">
         <span class="eyebrow">{t.eyebrow}</span>
         <h1 class="mt-4 text-4xl md:text-6xl font-bold leading-[1.05] text-ink-900">
           {t.title}
@@ -46,152 +49,587 @@ const agents = [
         </div>
       </div>
 
-      <!--
-        Gráfica hero — v0.3.0 refinado
-        ====================================================================
-        Top zone: Persona profesional (busto con corbata) habla con el Agente
-        Coordinador PMO; bocadillo con 2 oraciones explica el flujo.
-        Frame "Capa operativa multiagente" (color de Capa de Supervisión de
-        la sección Solución) envuelve los 8 agentes en pills con icono robot
-        + nombre, conectados al Tablero compartido (hexágono central) con
-        líneas punteadas y flechas bidireccionales (consultan y escriben).
-        Bottom: Dashboard ejecutivo + Artefactos PMO alineados al ancho.
-      -->
-      <div class="md:col-span-7">
-        <div class="relative aspect-[600/580] max-w-2xl mx-auto">
-          <svg viewBox="0 0 600 580" class="w-full h-full" aria-hidden="true">
-            <defs>
-              <linearGradient id="hero-pill" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#FFE6B8"/>
-                <stop offset="100%" stop-color="#FFC97A"/>
-              </linearGradient>
-              <marker id="arrEnd" viewBox="0 0 10 10" refX="9" refY="5"
-                      markerWidth="6" markerHeight="6" orient="auto">
-                <path d="M0 0 L10 5 L0 10 Z" fill="#E55F0A"/>
-              </marker>
-              <marker id="arrStart" viewBox="0 0 10 10" refX="1" refY="5"
-                      markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M0 0 L10 5 L0 10 Z" fill="#E55F0A"/>
-              </marker>
-            </defs>
+      <!-- RIGHT: Arquitectura isométrica 2.5D -->
+      <div class="lg:col-span-7">
+        <div class="iso-wrap" role="img" aria-label={platformAriaLabel}>
+          <div class="iso-scene">
+            <div class="iso-stage">
 
-            <!-- ========== TOP ZONE: Persona + Bocadillo + Coordinador ========== -->
+              <!-- =====================================================
+                   CAPA 1 — Interfaz y roles (translateZ +120)
+                   ===================================================== -->
+              <div class="iso-layer iso-l1">
+                <article class="iso-card iso-roles-card">
+                  <div class="iso-row">
+                    <div class="iso-avatar" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="28" height="28" fill="none"
+                           stroke="currentColor" stroke-width="1.8"
+                           stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+                        <path d="M11.2 14l.8 3.2L12.8 14" fill="currentColor" stroke="none"/>
+                      </svg>
+                    </div>
 
-            <!-- Persona B: busto profesional con corbata -->
-            <g aria-label="Profesional (PM, Director PMO, CTO o CEO)">
-              <circle cx="50" cy="35" r="13" fill="#fff" stroke="#243044" stroke-width="2.5"/>
-              <path d="M 22 95 C 22 75, 36 65, 50 65 C 64 65, 78 75, 78 95"
-                    fill="#fff" stroke="#243044" stroke-width="2.5" stroke-linejoin="round"/>
-              <path d="M 46 65 L 50 80 L 54 65 Z" fill="#FF7A1A" stroke="#FF7A1A"/>
-              <line x1="50" y1="80" x2="50" y2="92" stroke="#FF7A1A" stroke-width="2.8" stroke-linecap="round"/>
-            </g>
+                    <div class="iso-roles-text">
+                      <span class="iso-tag">{rolesLabel}</span>
+                      <div class="iso-roles-list">{rolesList}</div>
+                    </div>
 
-            <!-- Bocadillo de la conversación -->
-            <path d="M 100 18 L 410 18 Q 420 18 420 28 L 420 80 Q 420 90 410 90
-                     L 122 90 L 96 96 L 108 90 L 100 90 Q 90 90 90 80 L 90 28 Q 90 18 100 18 Z"
-                  fill="#fff" stroke="#CCD5E0" stroke-width="1.2"/>
-            <text x="105" y="38" font-family="Inter" font-size="10" font-weight="600" fill="#243044">{g.pmBubbleLine1}</text>
-            <text x="105" y="65" font-family="Inter" font-size="10" font-weight="500" fill="#56657A">{g.pmBubbleLine2}</text>
+                    <div class="iso-conn" aria-hidden="true">
+                      <svg viewBox="0 0 32 16" width="32" height="16" fill="none"
+                           stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                        <line x1="2" y1="8" x2="26" y2="8" stroke-dasharray="3 3"/>
+                        <polyline points="22,3 28,8 22,13"/>
+                      </svg>
+                    </div>
 
-            <!-- Línea bidireccional bocadillo ↔ Coordinador -->
-            <line x1="420" y1="50" x2="438" y2="50" stroke="#FF7A1A" stroke-width="1.8"
-                  marker-end="url(#arrEnd)" marker-start="url(#arrStart)"/>
+                    <div class="iso-coord-card" aria-label={g.coordinator}>
+                      <div class="iso-coord-name">{g.coordinator}</div>
+                      <div class="iso-coord-sub">{g.coordinatorRole}</div>
+                    </div>
+                  </div>
+                  <p class="iso-desc">{g.pmBubbleLine2}</p>
+                </article>
+              </div>
 
-            <!-- Coordinador pill -->
-            <rect x="438" y="30" width="148" height="44" rx="12"
-                  fill="url(#hero-pill)" stroke="#B84507" stroke-width="1.5"/>
-            <text x="512" y="51" text-anchor="middle" font-family="Inter"
-                  font-size="11" font-weight="700" fill="#0B1525">{g.coordinator}</text>
-            <text x="512" y="65" text-anchor="middle" font-family="Inter"
-                  font-size="9" font-weight="500" fill="#243044">{g.coordinatorRole}</text>
+              <!-- =====================================================
+                   CAPA 2 — Capa operativa multiagente (translateZ 0)
+                   ===================================================== -->
+              <div class="iso-layer iso-l2">
+                <div class="iso-platform">
+                  <span class="iso-platform-tag">{g.layerLabel}</span>
 
-            <!-- ========== FRAME: Capa operativa multiagente ========== -->
-            <rect x="20" y="100" width="560" height="365" rx="18"
-                  fill="#FFF6E5" stroke="#FFC97A" stroke-width="1.8" stroke-dasharray="6 4"/>
-            <rect x="36" y="92" width="240" height="20" rx="10" fill="#fff" stroke="#FFC97A" stroke-width="1.2"/>
-            <text x="156" y="106" text-anchor="middle" font-family="Inter"
-                  font-size="10" font-weight="700" fill="#B84507" letter-spacing="1.5">
-              {g.layerLabel.toUpperCase()}
-            </text>
+                  <div class="iso-platform-inner">
 
-            <!-- Líneas punteadas bidireccionales: agente ↔ Tablero -->
-            {agents.map((a) => (
-              <line x1={a.edge.x} y1={a.edge.y} x2={a.boardPt.x} y2={a.boardPt.y}
-                    stroke="#FFA63D" stroke-width="1.4" stroke-dasharray="3 3"
-                    marker-start="url(#arrStart)" marker-end="url(#arrEnd)"/>
-            ))}
+                    <!-- SVG: flechas bidireccionales agente ↔ tablero -->
+                    <svg class="iso-arrows" viewBox="0 0 600 400"
+                         preserveAspectRatio="none" aria-hidden="true">
+                      <defs>
+                        <marker id="iso-arrEnd" viewBox="0 0 10 10"
+                                refX="9" refY="5" markerWidth="5.5" markerHeight="5.5"
+                                orient="auto">
+                          <path d="M0 0L10 5L0 10z" fill="#FFC97A"/>
+                        </marker>
+                        <marker id="iso-arrStart" viewBox="0 0 10 10"
+                                refX="1" refY="5" markerWidth="5.5" markerHeight="5.5"
+                                orient="auto-start-reverse">
+                          <path d="M0 0L10 5L0 10z" fill="#FFC97A"/>
+                        </marker>
+                      </defs>
+                      <g stroke="#FFA63D" stroke-width="1.3" stroke-dasharray="4 3"
+                         fill="none"
+                         marker-start="url(#iso-arrStart)" marker-end="url(#iso-arrEnd)">
+                        <!-- Onboarder ↔ hex top-left -->
+                        <line x1="120" y1="58"  x2="260" y2="155"/>
+                        <!-- Scope (N) ↔ hex top -->
+                        <line x1="300" y1="58"  x2="300" y2="140"/>
+                        <!-- Schedule ↔ hex top-right -->
+                        <line x1="480" y1="58"  x2="340" y2="155"/>
+                        <!-- Repo (W) ↔ hex left -->
+                        <line x1="110" y1="200" x2="248" y2="200"/>
+                        <!-- EVM (E) ↔ hex right -->
+                        <line x1="490" y1="200" x2="352" y2="200"/>
+                        <!-- Minutes ↔ hex bot-left -->
+                        <line x1="120" y1="342" x2="260" y2="245"/>
+                        <!-- Risks (S) ↔ hex bottom -->
+                        <line x1="300" y1="342" x2="300" y2="260"/>
+                        <!-- Auditor ↔ hex bot-right -->
+                        <line x1="480" y1="342" x2="340" y2="245"/>
+                      </g>
+                    </svg>
 
-            <!-- Tablero compartido (hexágono central) -->
-            <polygon points="300,235 348,262 348,318 300,345 252,318 252,262"
-                     fill="url(#hero-pill)" stroke="#B84507" stroke-width="2"/>
-            <text x="300" y="280" text-anchor="middle" font-family="Inter"
-                  font-size="11" font-weight="700" fill="#0B1525">{g.board.split(' ')[0]}</text>
-            <text x="300" y="295" text-anchor="middle" font-family="Inter"
-                  font-size="11" font-weight="700" fill="#0B1525">{g.board.split(' ')[1] || ''}</text>
-            <text x="300" y="312" text-anchor="middle" font-family="Inter"
-                  font-size="8" font-weight="500" fill="#243044">{g.boardSub}</text>
+                    <!-- 8 agentes -->
+                    {agents.map((a) => (
+                      <div class={`iso-agent iso-agent-${a.key}${a.highlight ? ' iso-agent-hl' : ''}`}>
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none"
+                             stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <rect x="4" y="6" width="16" height="12" rx="2"/>
+                          <line x1="8"  y1="11" x2="10" y2="11" stroke-width="2.5"/>
+                          <line x1="14" y1="11" x2="16" y2="11" stroke-width="2.5"/>
+                          <line x1="9"  y1="15" x2="15" y2="15"/>
+                          <line x1="2"  y1="11" x2="4"  y2="11"/>
+                          <line x1="20" y1="11" x2="22" y2="11"/>
+                        </svg>
+                        <span>{a.name}</span>
+                      </div>
+                    ))}
 
-            <!-- 8 agentes: pill rectangular con icono Robot B + nombre -->
-            {agents.map((a) => (
-              <g>
-                <rect x={a.x} y={a.y} width="120" height="30" rx="10"
-                      fill={a.highlight ? '#FFE6B8' : '#fff'}
-                      stroke={a.highlight ? '#E55F0A' : '#FFA63D'}
-                      stroke-width={a.highlight ? '2' : '1.5'}/>
-                {/* Robot B minimalista: cabeza rectangular, ojos rendija, conectores laterales */}
-                <g transform={`translate(${a.x + 6} ${a.y + 7}) scale(0.667)`}>
-                  <rect x="4" y="6" width="16" height="12" rx="2"
-                        fill="none" stroke="#B84507" stroke-width="2.5"
-                        stroke-linecap="round" stroke-linejoin="round"/>
-                  <line x1="8"  y1="11" x2="10" y2="11" stroke="#B84507" stroke-width="3"  stroke-linecap="round"/>
-                  <line x1="14" y1="11" x2="16" y2="11" stroke="#B84507" stroke-width="3"  stroke-linecap="round"/>
-                  <line x1="9"  y1="15" x2="15" y2="15" stroke="#B84507" stroke-width="2.5" stroke-linecap="round"/>
-                  <line x1="2"  y1="11" x2="4"  y2="11" stroke="#B84507" stroke-width="2.5" stroke-linecap="round"/>
-                  <line x1="20" y1="11" x2="22" y2="11" stroke="#B84507" stroke-width="2.5" stroke-linecap="round"/>
-                </g>
-                <text x={a.x + 32} y={a.y + 20} font-family="Inter"
-                      font-size="11" font-weight="700" fill="#0B1525">{a.name}</text>
-              </g>
-            ))}
+                    <!-- Hexágono central — Tablero compartido -->
+                    <div class="iso-hex" aria-label={g.board}>
+                      <div class="iso-hex-inner">
+                        <span class="iso-hex-name">{g.board}</span>
+                        <span class="iso-hex-sub">{g.boardSub}</span>
+                      </div>
+                    </div>
 
-            <!-- ========== BOTTOM ZONE: Dashboard + Artefactos ========== -->
+                  </div>
+                </div>
+              </div>
 
-            <!-- Dashboard ejecutivo (alineado con izquierda del frame) -->
-            <rect x="20" y="480" width="270" height="92" rx="12" fill="#0B1525"/>
-            <text x="32" y="500" font-family="Inter" font-size="9" font-weight="700"
-                  fill="#FFC97A" letter-spacing="1">{g.dashboardLabel.toUpperCase()}</text>
-            <rect x="32" y="508" width="76" height="54" rx="6" fill="#0d1b30" stroke="#243044"/>
-            <text x="70" y="522" text-anchor="middle" fill="#FFC97A" font-size="8" font-family="Inter">CPI</text>
-            <text x="70" y="546" text-anchor="middle" fill="#fff" font-size="15" font-weight="700" font-family="Inter">1.04</text>
-            <rect x="116" y="508" width="76" height="54" rx="6" fill="#0d1b30" stroke="#243044"/>
-            <text x="154" y="522" text-anchor="middle" fill="#FFC97A" font-size="8" font-family="Inter">SPI</text>
-            <text x="154" y="546" text-anchor="middle" fill="#fff" font-size="15" font-weight="700" font-family="Inter">0.97</text>
-            <rect x="200" y="508" width="80" height="54" rx="6" fill="#0d1b30" stroke="#243044"/>
-            <text x="240" y="522" text-anchor="middle" fill="#FFC97A" font-size="8" font-family="Inter">EAC</text>
-            <text x="240" y="546" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="Inter">$1.2M</text>
+              <!-- =====================================================
+                   CAPA 3 — Datos, artefactos y analítica (translateZ -120)
+                   ===================================================== -->
+              <div class="iso-layer iso-l3">
+                <div class="iso-l3-grid">
 
-            <!-- Artefactos PMO (alineados con derecha del frame) -->
-            <rect x="310" y="480" width="270" height="92" rx="12"
-                  fill="#fff" stroke="#FFC97A" stroke-dasharray="4 4"/>
-            <text x="322" y="500" font-family="Inter" font-size="9" font-weight="700"
-                  fill="#B84507" letter-spacing="1">{g.artifactsLabel.toUpperCase()}</text>
-            <g font-family="Inter" font-size="9">
-              <rect x="322" y="510" width="78" height="22" rx="5" fill="#FFF6E5" stroke="#FFC97A"/>
-              <text x="361" y="525" text-anchor="middle" font-weight="700" fill="#243044">{g.artifacts.status}</text>
-              <rect x="406" y="510" width="78" height="22" rx="5" fill="#FFF6E5" stroke="#FFC97A"/>
-              <text x="445" y="525" text-anchor="middle" font-weight="700" fill="#243044">{g.artifacts.raid}</text>
-              <rect x="490" y="510" width="80" height="22" rx="5" fill="#FFF6E5" stroke="#FFC97A"/>
-              <text x="530" y="525" text-anchor="middle" font-weight="700" fill="#243044">{g.artifacts.minute}</text>
-              <rect x="322" y="538" width="78" height="22" rx="5" fill="#FFF6E5" stroke="#FFC97A"/>
-              <text x="361" y="553" text-anchor="middle" font-weight="700" fill="#243044">{g.artifacts.schedule}</text>
-              <rect x="406" y="538" width="78" height="22" rx="5" fill="#FFF6E5" stroke="#FFC97A"/>
-              <text x="445" y="553" text-anchor="middle" font-weight="700" fill="#243044">{g.artifacts.evm}</text>
-              <rect x="490" y="538" width="80" height="22" rx="5" fill="#0B1525"/>
-              <text x="530" y="553" text-anchor="middle" font-weight="700" fill="#FFC97A">{g.artifacts.committee}</text>
-            </g>
-          </svg>
+                  <article class="iso-card iso-dashboard">
+                    <span class="iso-tag iso-tag-amber">{g.dashboardLabel}</span>
+                    <div class="iso-kpis">
+                      <div class="iso-kpi">
+                        <span class="k">CPI</span><span class="v">1.04</span>
+                        <span class="d">↑ saludable</span>
+                      </div>
+                      <div class="iso-kpi">
+                        <span class="k">SPI</span><span class="v">0.97</span>
+                        <span class="d">≈ a tiempo</span>
+                      </div>
+                      <div class="iso-kpi">
+                        <span class="k">EAC</span><span class="v">$1.2M</span>
+                        <span class="d">+3% baseline</span>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="iso-card iso-artifacts">
+                    <span class="iso-tag iso-tag-amber">{g.artifactsLabel}</span>
+                    <div class="iso-art-grid">
+                      <span class="iso-art">{g.artifacts.status}</span>
+                      <span class="iso-art">{g.artifacts.raid}</span>
+                      <span class="iso-art">{g.artifacts.minute}</span>
+                      <span class="iso-art">{g.artifacts.schedule}</span>
+                      <span class="iso-art">{g.artifacts.evm}</span>
+                      <span class="iso-art iso-art-cta">{g.artifacts.committee}</span>
+                    </div>
+                  </article>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
+
+<style>
+  /* ============================================================
+     Arquitectura isométrica 2.5D — Hero
+     Variables CSS para mantener tweakable los valores 3D
+     ============================================================ */
+  .iso-wrap {
+    --iso-bg-1: #0B0F19;
+    --iso-bg-2: #131A2C;
+    --iso-glass:        rgba(255, 255, 255, 0.05);
+    --iso-glass-strong: rgba(255, 255, 255, 0.09);
+    --iso-glass-border: rgba(255, 255, 255, 0.10);
+    --iso-amber-50:  #FFF6E5;
+    --iso-amber-200: #FFC97A;
+    --iso-amber-300: #FFB35A;
+    --iso-amber-400: #FFA63D;
+    --iso-amber-500: #FF7A1A;
+    --iso-amber-600: #E55F0A;
+    --iso-tilt-x: 60deg;
+    --iso-tilt-z: -45deg;
+    --iso-elev:   120px;
+    --iso-duration: 500ms;
+
+    position: relative;
+    border-radius: 24px;
+    padding: 36px 28px;
+    overflow: hidden;
+    background:
+      radial-gradient(48% 40% at 22% 28%, rgba(255, 122, 26, 0.18), transparent 60%),
+      radial-gradient(34% 34% at 78% 72%, rgba(255, 201, 122, 0.12), transparent 60%),
+      linear-gradient(140deg, var(--iso-bg-1) 0%, var(--iso-bg-2) 100%);
+    box-shadow:
+      0 30px 60px -30px rgba(11, 21, 37, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    min-height: 600px;
+  }
+
+  /* Grid sutil de fondo (estilo blueprint) */
+  .iso-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 36px 36px;
+    pointer-events: none;
+    mask-image: radial-gradient(60% 50% at 50% 45%, #000 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(60% 50% at 50% 45%, #000 30%, transparent 100%);
+  }
+
+  .iso-scene {
+    position: relative;
+    width: 100%;
+    min-height: 560px;
+    perspective: 2000px;
+    transform-style: preserve-3d;
+    z-index: 1;
+  }
+
+  .iso-stage {
+    position: relative;
+    width: 100%;
+    min-height: 560px;
+    transform-style: preserve-3d;
+    transform: rotateX(var(--iso-tilt-x)) rotateY(0deg) rotateZ(var(--iso-tilt-z));
+    transition: transform var(--iso-duration) cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .iso-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    pointer-events: none; /* la capa misma no recibe eventos; sus hijos sí */
+  }
+  .iso-layer > * { pointer-events: auto; }
+
+  .iso-l1 { transform: translateZ(var(--iso-elev));               z-index: 30; }
+  .iso-l2 { transform: translateZ(0px);                           z-index: 20; }
+  .iso-l3 { transform: translateZ(calc(var(--iso-elev) * -1));    z-index: 10; }
+
+  /* ----------------------------------------
+     Tarjetas (glass)
+     ---------------------------------------- */
+  .iso-card {
+    background: var(--iso-glass);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid var(--iso-glass-border);
+    border-radius: 16px;
+    color: #fff;
+    box-shadow:
+      0 14px 28px -14px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .iso-tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 6px;
+  }
+  .iso-tag-amber { color: var(--iso-amber-200); }
+
+  /* ----------------------------------------
+     Capa 1 — Roles + Coordinador
+     ---------------------------------------- */
+  .iso-roles-card {
+    width: 100%;
+    max-width: 560px;
+    padding: 16px 20px 14px;
+  }
+  .iso-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: nowrap;
+  }
+  .iso-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a2740, #0d1b30);
+    border: 1px solid var(--iso-glass-border);
+    color: var(--iso-amber-200);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .iso-roles-text { flex: 1; min-width: 0; }
+  .iso-roles-list {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  .iso-conn {
+    color: var(--iso-amber-200);
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+  }
+  .iso-coord-card {
+    background: linear-gradient(135deg, var(--iso-amber-400), var(--iso-amber-600));
+    border-radius: 12px;
+    padding: 10px 14px;
+    color: #fff;
+    text-align: center;
+    flex-shrink: 0;
+    box-shadow: 0 8px 18px -6px rgba(255, 122, 26, 0.45);
+  }
+  .iso-coord-name {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.1;
+    letter-spacing: 0.1px;
+  }
+  .iso-coord-sub {
+    font-size: 9px;
+    opacity: 0.92;
+    margin-top: 2px;
+  }
+  .iso-desc {
+    margin: 12px 0 0;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.45;
+  }
+
+  /* ----------------------------------------
+     Capa 2 — Plataforma + agentes + hexágono
+     ---------------------------------------- */
+  .iso-platform {
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 3 / 2;
+    position: relative;
+    background: rgba(255, 246, 229, 0.06);
+    border: 1.5px dashed rgba(255, 201, 122, 0.40);
+    border-radius: 18px;
+    padding: 18px;
+  }
+  .iso-platform-tag {
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    background: var(--iso-bg-2);
+    padding: 2px 12px;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--iso-amber-200);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 6px;
+  }
+  .iso-platform-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .iso-arrows {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .iso-agent {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 201, 122, 0.45);
+    border-radius: 999px;
+    padding: 5px 11px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow:
+      0 6px 14px -8px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: transform var(--iso-duration), background 200ms, border-color 200ms;
+    color: #fff;
+  }
+  .iso-agent > svg { color: var(--iso-amber-200); }
+  .iso-agent:hover {
+    transform: translateY(-1px) scale(1.03);
+    background: rgba(255, 255, 255, 0.12);
+  }
+  .iso-agent-hl {
+    background: rgba(255, 122, 26, 0.22);
+    border-color: var(--iso-amber-500);
+    box-shadow:
+      0 0 0 1px rgba(255, 122, 26, 0.5),
+      0 0 24px rgba(255, 122, 26, 0.35);
+  }
+  .iso-agent-hl > svg { color: var(--iso-amber-200); }
+
+  /* Posiciones de los 8 agentes alrededor del hexágono */
+  .iso-agent-onboarder { top: 6%;  left: 6%;  }
+  .iso-agent-scope     { top: 6%;  left: 50%; transform: translateX(-50%); }
+  .iso-agent-schedule  { top: 6%;  right: 6%; }
+  .iso-agent-repo      { top: 50%; left: 0%;  transform: translateY(-50%); }
+  .iso-agent-evm       { top: 50%; right: 0%; transform: translateY(-50%); }
+  .iso-agent-minutes   { bottom: 6%; left: 6%; }
+  .iso-agent-risks     { bottom: 6%; left: 50%; transform: translateX(-50%); }
+  .iso-agent-auditor   { bottom: 6%; right: 6%; }
+  /* Pequeño contrapeso del transform para hover en agentes centrados */
+  .iso-agent-scope:hover  { transform: translateX(-50%) translateY(-1px) scale(1.03); }
+  .iso-agent-risks:hover  { transform: translateX(-50%) translateY(-1px) scale(1.03); }
+  .iso-agent-repo:hover   { transform: translateY(-50%) scale(1.03); }
+  .iso-agent-evm:hover    { transform: translateY(-50%) scale(1.03); }
+
+  /* Hexágono central */
+  .iso-hex {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140px;
+    height: 140px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, var(--iso-amber-400), var(--iso-amber-600));
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    box-shadow:
+      0 12px 32px -8px rgba(255, 122, 26, 0.45);
+    z-index: 2;
+  }
+  .iso-hex-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #FFE6B8 0%, #FFC97A 60%, #FFA63D 100%);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: #0B1525;
+  }
+  .iso-hex-name {
+    display: block;
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 1.15;
+    padding: 0 12px;
+  }
+  .iso-hex-sub {
+    display: block;
+    font-size: 9px;
+    font-weight: 600;
+    color: #243044;
+    margin-top: 3px;
+  }
+
+  /* ----------------------------------------
+     Capa 3 — Dashboard + Artefactos
+     ---------------------------------------- */
+  .iso-l3-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    width: 100%;
+    max-width: 600px;
+  }
+  .iso-dashboard, .iso-artifacts {
+    padding: 14px 16px;
+  }
+  .iso-kpis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .iso-kpi {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--iso-glass-border);
+    border-radius: 10px;
+    padding: 8px 6px;
+    text-align: center;
+  }
+  .iso-kpi .k {
+    display: block;
+    font-size: 8px;
+    font-weight: 700;
+    color: var(--iso-amber-200);
+    letter-spacing: 1px;
+  }
+  .iso-kpi .v {
+    display: block;
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    margin-top: 2px;
+  }
+  .iso-kpi .d {
+    display: block;
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.55);
+    margin-top: 2px;
+  }
+
+  .iso-art-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .iso-art {
+    background: rgba(255, 246, 229, 0.08);
+    border: 1px solid rgba(255, 201, 122, 0.30);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .iso-art-cta {
+    background: linear-gradient(135deg, var(--iso-amber-500), var(--iso-amber-600));
+    color: #fff;
+    border-color: var(--iso-amber-500);
+    font-weight: 700;
+  }
+
+  /* ============================================================
+     RESPONSIVE — <1024px: desactivar iso, layout vertical
+     ============================================================ */
+  @media (max-width: 1023.98px) {
+    .iso-wrap {
+      padding: 22px 16px;
+      min-height: 0;
+    }
+    .iso-scene { perspective: none; min-height: 0; }
+    .iso-stage {
+      transform: none;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .iso-layer {
+      position: relative;
+      inset: auto;
+      transform: none !important;
+      z-index: auto;
+    }
+    .iso-layer > * { pointer-events: auto; }
+    .iso-platform {
+      aspect-ratio: auto;
+      min-height: 420px;
+      padding-top: 28px;
+    }
+    .iso-l3-grid { grid-template-columns: 1fr; }
+  }
+
+  /* En pantallas muy estrechas, agentes más pequeños y nombres más cortos visualmente */
+  @media (max-width: 640px) {
+    .iso-agent { font-size: 10px; padding: 4px 9px; gap: 5px; }
+    .iso-hex { width: 110px; height: 110px; }
+    .iso-hex-name { font-size: 11px; }
+    .iso-row { flex-wrap: wrap; gap: 10px; }
+    .iso-conn { display: none; }
+    .iso-coord-card { width: 100%; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .iso-stage, .iso-agent { transition: none !important; }
+  }
+</style>
