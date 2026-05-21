@@ -28,11 +28,13 @@ const es = {
       'PMOforge equipa al Gerente de Proyectos de TI con un equipo de agentes IA jerárquicos que automatizan la gobernanza, mantienen vivos los artefactos PMI/SAFe y aumentan la capacidad de decisión — con ~50% menos tiempo de iteración y sin cambiar tu cultura.',
     ctaPrimary: 'Sumarme a la lista de espera',
     ctaSecondary: 'Hablemos',
-    // Etiquetas de la gráfica hero (constelación)
+    // Etiquetas de la gráfica hero
     graph: {
-      pmBubble: 'Hablo con el Coordinador. Él coordina los 8 agentes.',
-      coordinator: 'Coordinador',
-      coordinatorRole: 'único interlocutor',
+      pmBubbleLine1: 'Roles como PM, Director PMO, CTO o CEO conversan con el Agente Coordinador PMO.',
+      pmBubbleLine2: 'El Coordinador adapta vistas y funciones al perfil de cada rol.',
+      coordinator: 'Agente Coordinador PMO',
+      coordinatorRole: 'supervisa la PMO',
+      layerLabel: 'Capa operativa multiagente',
       board: 'Tablero compartido',
       boardSub: 'eventos asíncronos',
       agents: {
@@ -240,14 +242,14 @@ const es = {
   },
   uiPreview: {
     eyebrow: 'Vista del producto · en construcción',
-    title: 'Así te conversas con el Coordinador',
-    lead: 'Mockup de la interfaz web del producto. Una sola conversación con el Coordinador; ocho agentes trabajando detrás; dashboard que se actualiza solo. Preview pre-Demo 1 — las pantallas reales llegan post-prueba con cliente.',
+    title: 'Así te conversas con el Agente Coordinador PMO',
+    lead: 'Mockup de la interfaz web del producto. Una sola conversación con el Agente Coordinador PMO; ocho agentes trabajando detrás; dashboard que se actualiza solo. Preview pre-Demo 1 — las pantallas reales llegan post-prueba con cliente.',
     labels: {
-      browser: 'app.pmoforge.ai · proyecto · Sinapsa-LATAM',
+      browser: 'app.pmoforge.ai · proyecto · LATAM',
       sidebarProjects: 'PROYECTOS',
       sidebarViews: 'VISTAS',
       sidebarOps: 'CAPA OPERATIVA',
-      chatHeader: 'Coordinador · Sinapsa-LATAM',
+      chatHeader: 'Agente Coordinador PMO · LATAM',
       chatSub: 'único interlocutor · memoria viva · 8 agentes detrás',
       panelHeader: 'SALUD DEL PROYECTO',
       kpiBlock: 'CPI · SPI · EAC',
@@ -257,10 +259,15 @@ const es = {
       risks: 'TOP RIESGOS · auditados',
       nextArtifacts: 'PRÓXIMOS ARTEFACTOS',
       stealth: 'todo auditado · cero alucinaciones aritméticas',
-      placeholder: 'Pregunta o instruye al Coordinador…',
+      placeholder: 'Pregunta o instruye al Agente Coordinador PMO…',
       badge: 'EN CONSTRUCCIÓN'
     },
+    sidebar: {
+      activeProject: 'LATAM',
+      otherProjects: ['Migración BSS', 'Automatización IA · tablero de issues']
+    },
     chat: {
+      botName: 'Agente Coordinador PMO',
       bot1: [
         'Buenos días Alfredo. El status semanal está listo. CPI 1.04, SPI 0.97.',
         'El Auditor marcó la minuta del jueves para revisión: falta firma del sponsor.'
@@ -274,7 +281,9 @@ const es = {
         '¿Te paso el detalle al comité o quieres revisarlo aquí?'
       ],
       user2: 'Aquí. Y prepara la actualización del RAID.',
-      typing: 'Coordinador está consultando a Riesgos + Dependencias…'
+      typing: 'Agente Coordinador PMO está consultando a Riesgos + Dependencias…',
+      progressLabel: '→ progreso al 77%',
+      progressPercent: 77
     }
   },
   founder: {
@@ -330,9 +339,11 @@ const en: typeof es = {
     ctaPrimary: 'Join the waitlist',
     ctaSecondary: 'Let’s talk',
     graph: {
-      pmBubble: 'I talk to the Coordinator. He coordinates the 8 agents.',
-      coordinator: 'Coordinator',
-      coordinatorRole: 'single interlocutor',
+      pmBubbleLine1: 'Roles such as PM, PMO Director, CTO or CEO talk to the PMO Coordinator Agent.',
+      pmBubbleLine2: "The Coordinator tailors views and functions to each role's profile.",
+      coordinator: 'PMO Coordinator Agent',
+      coordinatorRole: 'supervises the PMO',
+      layerLabel: 'Multi-agent operational layer',
       board: 'Shared board',
       boardSub: 'asynchronous events',
       agents: {
@@ -540,14 +551,14 @@ const en: typeof es = {
   },
   uiPreview: {
     eyebrow: 'Product preview · under construction',
-    title: 'This is how you talk to the Coordinator',
-    lead: 'Mockup of the product web interface. A single conversation with the Coordinator; eight agents working behind; a dashboard that updates itself. Pre-Demo 1 preview — the real screens land after the first customer trial.',
+    title: 'This is how you talk to the PMO Coordinator Agent',
+    lead: 'Mockup of the product web interface. A single conversation with the PMO Coordinator Agent; eight agents working behind; a dashboard that updates itself. Pre-Demo 1 preview — the real screens land after the first customer trial.',
     labels: {
-      browser: 'app.pmoforge.ai · project · Sinapsa-LATAM',
+      browser: 'app.pmoforge.ai · project · LATAM',
       sidebarProjects: 'PROJECTS',
       sidebarViews: 'VIEWS',
       sidebarOps: 'OPERATIONAL LAYER',
-      chatHeader: 'Coordinator · Sinapsa-LATAM',
+      chatHeader: 'PMO Coordinator Agent · LATAM',
       chatSub: 'single interlocutor · live memory · 8 agents behind',
       panelHeader: 'PROJECT HEALTH',
       kpiBlock: 'CPI · SPI · EAC',
@@ -557,10 +568,15 @@ const en: typeof es = {
       risks: 'TOP RISKS · audited',
       nextArtifacts: 'NEXT ARTIFACTS',
       stealth: 'all audited · zero arithmetic hallucinations',
-      placeholder: 'Ask or instruct the Coordinator…',
+      placeholder: 'Ask or instruct the PMO Coordinator Agent…',
       badge: 'UNDER CONSTRUCTION'
     },
+    sidebar: {
+      activeProject: 'LATAM',
+      otherProjects: ['BSS Migration', 'AI Automation · issues board']
+    },
     chat: {
+      botName: 'PMO Coordinator Agent',
       bot1: [
         'Good morning Alfredo. Weekly status is ready. CPI 1.04, SPI 0.97.',
         'The Auditor flagged Thursday’s minute for review: sponsor signature missing.'
@@ -574,7 +590,9 @@ const en: typeof es = {
         'Should I push the detail to the committee or do you want to review it here?'
       ],
       user2: 'Here. And prepare the RAID update.',
-      typing: 'Coordinator is consulting Risks + Dependencies…'
+      typing: 'PMO Coordinator Agent is consulting Risks + Dependencies…',
+      progressLabel: '→ progress 77%',
+      progressPercent: 77
     }
   },
   founder: {

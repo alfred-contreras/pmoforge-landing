@@ -7,6 +7,9 @@ const { lang } = Astro.props;
 const t = getContent(lang).uiPreview;
 const L = t.labels;
 const C = t.chat;
+const S = t.sidebar;
+// Posición del fill de la barra de progreso (de 0 a 240 ancho)
+const progressWidth = (S ? 240 : 240) * (C.progressPercent / 100);
 ---
 
 <section id="preview" class="relative">
@@ -33,6 +36,9 @@ const C = t.chat;
           <linearGradient id="ui-chat" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#F6F8FB"/>
           </linearGradient>
+          <linearGradient id="ui-prog" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#FFA63D"/><stop offset="100%" stop-color="#FF7A1A"/>
+          </linearGradient>
         </defs>
 
         <!-- Marco navegador -->
@@ -49,9 +55,10 @@ const C = t.chat;
         <rect x="10" y="54" width="220" height="516" fill="url(#ui-side)"/>
         <text x="28" y="80" font-size="11" font-weight="700" fill="#FFC97A" letter-spacing="1" font-family="Inter">{L.sidebarProjects}</text>
         <rect x="20" y="90" width="200" height="32" rx="6" fill="#1a2740"/>
-        <text x="32" y="110" font-size="11" fill="#FFC97A" font-weight="600" font-family="Inter">● Sinapsa-LATAM</text>
-        <text x="32" y="146" font-size="11" fill="#9BA9BC" font-family="Inter">○ Claro · Migración BSS</text>
-        <text x="32" y="166" font-size="11" fill="#9BA9BC" font-family="Inter">○ Ecopetrol · Refinería</text>
+        <text x="32" y="110" font-size="11" fill="#FFC97A" font-weight="600" font-family="Inter">● {S.activeProject}</text>
+        <text x="32" y="146" font-size="11" fill="#9BA9BC" font-family="Inter">○ {S.otherProjects[0]}</text>
+        <text x="32" y="166" font-size="11" fill="#9BA9BC" font-family="Inter">○ {S.otherProjects[1]}</text>
+
         <text x="28" y="200" font-size="11" font-weight="700" fill="#FFC97A" letter-spacing="1" font-family="Inter">{L.sidebarViews}</text>
         <text x="32" y="220" font-size="11" fill="#fff" font-family="Inter">▸ Chat Coordinador</text>
         <text x="32" y="240" font-size="11" fill="#9BA9BC" font-family="Inter">▸ Dashboard</text>
@@ -78,7 +85,7 @@ const C = t.chat;
 
         <g font-family="Inter" font-size="11">
           <rect x="260" y="120" width="440" height="58" rx="10" fill="#FFF6E5" stroke="#FFC97A"/>
-          <text x="272" y="138" fill="#0B1525" font-weight="700">{t.labels.chatHeader.split(' · ')[0]}</text>
+          <text x="272" y="138" fill="#0B1525" font-weight="700">{C.botName}</text>
           <text x="272" y="154" fill="#243044">{C.bot1[0]}</text>
           <text x="272" y="168" fill="#243044">{C.bot1[1]}</text>
 
@@ -86,7 +93,7 @@ const C = t.chat;
           <text x="362" y="210" fill="#fff">{C.user1}</text>
 
           <rect x="260" y="234" width="440" height="124" rx="10" fill="#FFF6E5" stroke="#FFC97A"/>
-          <text x="272" y="252" fill="#0B1525" font-weight="700">{t.labels.chatHeader.split(' · ')[0]}</text>
+          <text x="272" y="252" fill="#0B1525" font-weight="700">{C.botName}</text>
           <text x="272" y="268" fill="#243044">{C.bot2[0]}</text>
           <text x="282" y="286" fill="#243044">{C.bot2[1]}</text>
           <text x="282" y="304" fill="#243044">{C.bot2[2]}</text>
@@ -96,11 +103,22 @@ const C = t.chat;
           <rect x="350" y="370" width="350" height="32" rx="10" fill="#0B1525"/>
           <text x="362" y="390" fill="#fff">{C.user2}</text>
 
-          <rect x="260" y="414" width="440" height="38" rx="10" fill="#fff" stroke="#FFA63D" stroke-dasharray="4 4"/>
-          <text x="272" y="436" fill="#243044" font-style="italic">{C.typing}</text>
-          <circle cx="680" cy="436" r="4" fill="#FF7A1A">
+          <!-- Indicador con progreso porcentual + barra animada -->
+          <rect x="260" y="414" width="440" height="58" rx="10" fill="#fff" stroke="#FFA63D" stroke-dasharray="4 4"/>
+          <text x="272" y="432" fill="#243044" font-style="italic">{C.typing}</text>
+          <circle cx="668" cy="430" r="3.5" fill="#FF7A1A">
             <animate attributeName="opacity" values="0.2;1;0.2" dur="1.2s" repeatCount="indefinite"/>
           </circle>
+          <circle cx="678" cy="430" r="3.5" fill="#FF7A1A">
+            <animate attributeName="opacity" values="0.2;1;0.2" dur="1.2s" begin="0.3s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="688" cy="430" r="3.5" fill="#FF7A1A">
+            <animate attributeName="opacity" values="0.2;1;0.2" dur="1.2s" begin="0.6s" repeatCount="indefinite"/>
+          </circle>
+          <!-- barra -->
+          <rect x="272" y="448" width="240" height="8" rx="4" fill="#FFF6E5" stroke="#FFC97A"/>
+          <rect x="272" y="448" width={progressWidth} height="8" rx="4" fill="url(#ui-prog)"/>
+          <text x="520" y="456" font-weight="700" fill="#B84507">{C.progressLabel}</text>
         </g>
 
         <!-- Input -->

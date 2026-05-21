@@ -8,9 +8,9 @@ Convención adoptada el 2026-05-20 (decisión D5 en `DECISIONS.md` del monorepo 
 
 ## [Unreleased]
 
-## [0.3.0] — 2026-05-20
+## [0.3.0] — 2026-05-21
 
-> Rediseño visual completo del hero (constelación orbital), fix del bug de iconos en "Cuatro promesas" (cuadrado negro), sección nueva "Vista del producto · en construcción" entre Casos de uso y Fundador, sección nueva "Dos lentes — quién gana qué" entre Solución y Cuatro promesas, copy refinado con 6 mensajes nuevos extraídos del deck Sinapsa v2.0. Cero filtraciones de Modo Stealth (sin nombres de modelos, providers, ni cifras unitarias de costo).
+> Rediseño visual completo del hero (constelación → capa operativa multiagente con 8 pills + tablero hexagonal), fix del bug de iconos en "Cuatro promesas" (cuadrado negro), fix paralelo de `border-ember-300` en Solution.astro y Waitlist.astro, sección nueva "Vista del producto · en construcción" entre Casos de uso y Fundador, sección nueva "Dos lentes — quién gana qué" entre Solución y Cuatro promesas, copy refinado con 6 mensajes nuevos extraídos del deck Sinapsa v2.0. Cero filtraciones de marca pública (sin nombres de cliente, sin "Sinapsa", sin "Claro", sin "Ecopetrol"). Cero filtraciones de Modo Stealth (sin nombres de modelos, providers, ni cifras unitarias de costo).
 
 ### Added
 
@@ -25,7 +25,7 @@ Convención adoptada el 2026-05-20 (decisión D5 en `DECISIONS.md` del monorepo 
 
 ### Changed
 
-- **Gráfica hero rediseñada como "Constelación orbital":** Tablero compartido al centro como núcleo ember, 8 agentes operacionales en órbita radial (Auditor destacado en ember-100 + stroke ember-600), PM al norte con burbuja conversacional hacia el Coordinador (puerta única), Dashboard ejecutivo al sur-oeste con CPI/SPI/EAC, Artefactos PMO al sur-este (Status, RAID, Minuta, Cronograma, EVM, → comité). Reemplaza la jerarquía vertical Mando/Supervisión/Operativos del SVG anterior. Integra Dashboard + Artefactos que no aparecían en el slide 6 del deck Sinapsa.
+- **Gráfica hero rediseñada completa:** zona superior con persona profesional (busto con corbata) que dialoga vía bocadillo de 2 oraciones con el **Agente Coordinador PMO** (pill ember a la derecha). Bocadillo con copy nuevo en ES + EN bien redactado: "Roles como PM, Director PMO, CTO o CEO conversan con el Agente Coordinador PMO. El Coordinador adapta vistas y funciones al perfil de cada rol." Marco "Capa operativa multiagente" envuelve los 8 agentes con `bg-ember-50` + `border-ember-200` (mismo color de la Capa de Supervisión de la sección Solución), ancho alineado con Dashboard + Artefactos abajo. Etiqueta superior del marco visible. Cada agente es un pill rectangular redondeado con **icono Robot B minimalista** (cabeza rectangular sin antena, ojos rendija, conectores laterales) + nombre. Tablero compartido al centro como **hexágono** (pointy-top) en gradient ember. Cada pill conectado al Tablero con **línea punteada bidireccional + flechas en ambos extremos** (denotan consulta + escritura). Auditor destacado con bg `ember-100` y stroke `ember-600`. Dashboard ejecutivo (CPI/SPI/EAC) y Artefactos PMO (Status, RAID, Minuta, Cronograma, EVM, → comité) en base, alineados con el ancho del marco.
 - **Título de Problem:** "El PMP moderno gasta el 60% de su tiempo en mantener artefactos vivos, no en decidir" → "El PM senior de TI gasta el 30–40% de su tiempo en lo administrativo, no en decidir". Cifra alineada con slide 4 del deck v2.0 (banda más realista y específica a "senior de TI").
 - **Intro de Solution:** incorpora "Tu estrategia se vuelve la brújula viva de la PMO en ejecución".
 - **Título de Competitive:** "PMOforge frente a las opciones que ya conoces" → "PMOforge es categoría nueva, no incremento sobre lo que existe".
@@ -36,6 +36,9 @@ Convención adoptada el 2026-05-20 (decisión D5 en `DECISIONS.md` del monorepo 
 
 - **Bug crítico de iconos en `ValueProp.astro` (cuadrado negro en "Cuatro promesas"):** la clase `text-ember-300` NO existía en `tailwind.config.mjs` (la paleta tiene `ember-50/100/200/400/500/600/700`). Tailwind no generaba la regla; la letra heredaba `color:#0B1525` sobre fondo `bg-ink-900` → letras invisibles. Fix: reemplazo de las letras por íconos SVG (lucide-style) inline en `stroke="currentColor"` heredando `text-ember-200` (existente). Iconos: Memoria (stack de discos), Auditoría (sello con check), EVM (gráfica de barras + línea), Resiliencia (escudo con check).
 - **Esquema de `pillar` en `content.ts`:** campo `icon` (letra string) reemplazado por `iconKey` (clave del switch que selecciona el SVG en el componente).
+- **Fix paralelo `border-ember-300` en `Solution.astro` (Capa de Supervisión + banda de gobierno) y `Waitlist.astro` (link a Calendly):** mismo bug — clase inexistente en la paleta Tailwind, el `border-2` se renderizaba con `currentColor` en lugar del tono ámbar previsto. Cambio a `border-ember-200` (#FFC97A), color que sí existe y mantiene la intención visual.
+- **UIPreview · barra del navegador, sidebar de proyectos y headers del chat:** removidos nombres de cliente (Sinapsa, Claro, Ecopetrol). Estado: URL `app.pmoforge.ai · proyecto · LATAM`; sidebar con proyecto activo `LATAM`, otros proyectos `Migración BSS` y `Automatización IA · tablero de issues`; header de chat `Agente Coordinador PMO · LATAM`; bot identificado como `Agente Coordinador PMO` en todas las burbujas y placeholder del input.
+- **UIPreview · indicador de trabajo del Coordinador:** ahora muestra avance porcentual visible — texto `Agente Coordinador PMO está consultando a Riesgos + Dependencias… → progreso al 77%` con barra de progreso animada (gradient ember-400 → ember-500) y tres dots pulsantes desfasados.
 
 ### Diferido a próximas releases
 
