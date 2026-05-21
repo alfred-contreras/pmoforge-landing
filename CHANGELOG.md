@@ -6,7 +6,9 @@ El formato se basa en [Keep a Changelog 1.1.0](https://keepachangelog.com/es-ES/
 
 Convención adoptada el 2026-05-20 (decisión D5 en `DECISIONS.md` del monorepo `pmforge`). La versión 0.1.0 se documenta retroactivamente sin git tag; el etiquetado formal arranca en v0.2.0.
 
-## [Unreleased] — v0.2.0
+## [Unreleased]
+
+## [0.2.0] — 2026-05-20
 
 > Release ampliada (decisión D6, 2026-05-20): copy alineado con arquitectura cerrada de 9 agentes + sección competitiva + sección consolidada de oferta de valor con lenguaje accesible + higiene técnica F1 ligera (Speed Insights, sitemap, robots).
 
@@ -59,5 +61,6 @@ Despliegue público inicial de la landing PMOforge en Vercel (`pmoforge-landing.
 
 ---
 
-[Unreleased]: https://github.com/alfred-contreras/pmoforge-landing/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.1.0
+[Unreleased]: https://github.com/alfred-contreras/pmoforge-landing/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.2.0
+[0.1.0]: https://github.com/alfred-contreras/pmoforge-landing/commit/84236a3
