@@ -1,0 +1,150 @@
+---
+import type { Lang } from '../data/content';
+import { getContent } from '../data/content';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getContent(lang).uiPreview;
+const L = t.labels;
+const C = t.chat;
+---
+
+<section id="preview" class="relative">
+  <div class="max-w-6xl mx-auto px-5 py-20">
+    <span class="eyebrow">{t.eyebrow}</span>
+    <h2 class="mt-3 text-3xl md:text-4xl font-bold text-ink-900 max-w-3xl leading-tight">
+      {t.title}
+    </h2>
+    <p class="mt-5 text-lg text-ink-700 max-w-3xl leading-relaxed">{t.lead}</p>
+
+    <!-- Mockup de UI: marco navegador + sidebar + chat + panel salud -->
+    <div class="mt-12 relative rounded-2xl bg-ink-900 p-3 shadow-xl shadow-ink-900/20 overflow-hidden">
+      <span class="absolute top-5 right-5 z-10 inline-flex items-center gap-1.5 rounded-full bg-ember-500 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+        {L.badge}
+      </span>
+
+      <svg viewBox="0 0 1100 580" class="w-full h-auto block rounded-xl"
+           xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="ui-side" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0d1b30"/><stop offset="100%" stop-color="#0B1525"/>
+          </linearGradient>
+          <linearGradient id="ui-chat" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#F6F8FB"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Marco navegador -->
+        <rect x="10" y="10" width="1080" height="560" rx="14" fill="#243044" stroke="#1a2740"/>
+        <circle cx="34" cy="32" r="6" fill="#FF5F57"/>
+        <circle cx="54" cy="32" r="6" fill="#FFBD2E"/>
+        <circle cx="74" cy="32" r="6" fill="#28C940"/>
+        <rect x="100" y="22" width="500" height="20" rx="10" fill="#1a2740"/>
+        <text x="350" y="36" text-anchor="middle" font-size="10" fill="#9BA9BC" font-family="Inter">
+          {L.browser}
+        </text>
+
+        <!-- Sidebar izquierda -->
+        <rect x="10" y="54" width="220" height="516" fill="url(#ui-side)"/>
+        <text x="28" y="80" font-size="11" font-weight="700" fill="#FFC97A" letter-spacing="1" font-family="Inter">{L.sidebarProjects}</text>
+        <rect x="20" y="90" width="200" height="32" rx="6" fill="#1a2740"/>
+        <text x="32" y="110" font-size="11" fill="#FFC97A" font-weight="600" font-family="Inter">● Sinapsa-LATAM</text>
+        <text x="32" y="146" font-size="11" fill="#9BA9BC" font-family="Inter">○ Claro · Migración BSS</text>
+        <text x="32" y="166" font-size="11" fill="#9BA9BC" font-family="Inter">○ Ecopetrol · Refinería</text>
+        <text x="28" y="200" font-size="11" font-weight="700" fill="#FFC97A" letter-spacing="1" font-family="Inter">{L.sidebarViews}</text>
+        <text x="32" y="220" font-size="11" fill="#fff" font-family="Inter">▸ Chat Coordinador</text>
+        <text x="32" y="240" font-size="11" fill="#9BA9BC" font-family="Inter">▸ Dashboard</text>
+        <text x="32" y="260" font-size="11" fill="#9BA9BC" font-family="Inter">▸ Alcance + Backlog</text>
+        <text x="32" y="280" font-size="11" fill="#9BA9BC" font-family="Inter">▸ Cronograma</text>
+        <text x="32" y="300" font-size="11" fill="#9BA9BC" font-family="Inter">▸ Salud Financiera</text>
+        <text x="32" y="320" font-size="11" fill="#9BA9BC" font-family="Inter">▸ RAID</text>
+        <text x="32" y="340" font-size="11" fill="#9BA9BC" font-family="Inter">▸ Minutas</text>
+        <text x="32" y="360" font-size="11" fill="#9BA9BC" font-family="Inter">▸ Líneas base</text>
+        <text x="32" y="380" font-size="11" fill="#9BA9BC" font-family="Inter">▸ Auditoría</text>
+        <text x="28" y="420" font-size="11" font-weight="700" fill="#FFC97A" letter-spacing="1" font-family="Inter">{L.sidebarOps}</text>
+        <g font-family="Inter" font-size="9">
+          <circle cx="40"  cy="450" r="10" fill="#FFA63D"/><text x="56" y="453" fill="#fff">Onboarder ✓</text>
+          <circle cx="40"  cy="475" r="10" fill="#FFA63D"/><text x="56" y="478" fill="#fff">Alcance ✓</text>
+          <circle cx="40"  cy="500" r="10" fill="#FFA63D"/><text x="56" y="503" fill="#fff">Cronograma ⟳</text>
+          <circle cx="40"  cy="525" r="10" fill="#E55F0A"/><text x="56" y="528" fill="#fff">Auditor (revisando)</text>
+          <circle cx="40"  cy="550" r="10" fill="#FFA63D"/><text x="56" y="553" fill="#fff">Minutas ⏸</text>
+        </g>
+
+        <!-- Centro: chat -->
+        <rect x="240" y="54" width="540" height="516" fill="url(#ui-chat)"/>
+        <text x="260" y="84" font-size="13" font-weight="700" fill="#0B1525" font-family="Inter">{L.chatHeader}</text>
+        <text x="260" y="100" font-size="10" fill="#56657A" font-family="Inter">{L.chatSub}</text>
+
+        <g font-family="Inter" font-size="11">
+          <rect x="260" y="120" width="440" height="58" rx="10" fill="#FFF6E5" stroke="#FFC97A"/>
+          <text x="272" y="138" fill="#0B1525" font-weight="700">{t.labels.chatHeader.split(' · ')[0]}</text>
+          <text x="272" y="154" fill="#243044">{C.bot1[0]}</text>
+          <text x="272" y="168" fill="#243044">{C.bot1[1]}</text>
+
+          <rect x="350" y="190" width="350" height="32" rx="10" fill="#0B1525"/>
+          <text x="362" y="210" fill="#fff">{C.user1}</text>
+
+          <rect x="260" y="234" width="440" height="124" rx="10" fill="#FFF6E5" stroke="#FFC97A"/>
+          <text x="272" y="252" fill="#0B1525" font-weight="700">{t.labels.chatHeader.split(' · ')[0]}</text>
+          <text x="272" y="268" fill="#243044">{C.bot2[0]}</text>
+          <text x="282" y="286" fill="#243044">{C.bot2[1]}</text>
+          <text x="282" y="304" fill="#243044">{C.bot2[2]}</text>
+          <text x="282" y="322" fill="#243044">{C.bot2[3]}</text>
+          <text x="272" y="346" fill="#56657A" font-style="italic">{C.bot2[4]}</text>
+
+          <rect x="350" y="370" width="350" height="32" rx="10" fill="#0B1525"/>
+          <text x="362" y="390" fill="#fff">{C.user2}</text>
+
+          <rect x="260" y="414" width="440" height="38" rx="10" fill="#fff" stroke="#FFA63D" stroke-dasharray="4 4"/>
+          <text x="272" y="436" fill="#243044" font-style="italic">{C.typing}</text>
+          <circle cx="680" cy="436" r="4" fill="#FF7A1A">
+            <animate attributeName="opacity" values="0.2;1;0.2" dur="1.2s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+
+        <!-- Input -->
+        <rect x="260" y="510" width="500" height="40" rx="10" fill="#fff" stroke="#CCD5E0"/>
+        <text x="272" y="534" font-size="11" fill="#9BA9BC" font-family="Inter">{L.placeholder}</text>
+        <circle cx="744" cy="530" r="14" fill="#FF7A1A"/>
+        <text x="744" y="535" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Inter">↑</text>
+
+        <!-- Panel derecho -->
+        <rect x="790" y="54" width="300" height="516" fill="#F6F8FB"/>
+        <text x="808" y="82" font-size="11" font-weight="700" fill="#0B1525" letter-spacing="1" font-family="Inter">{L.panelHeader}</text>
+
+        <g font-family="Inter">
+          <rect x="808" y="96" width="264" height="68" rx="10" fill="#fff" stroke="#E8EDF3"/>
+          <text x="820" y="118" font-size="10" fill="#56657A" font-weight="700">{L.kpiBlock}</text>
+          <text x="820" y="142" font-size="22" font-weight="700" fill="#0B1525">1.04</text>
+          <text x="860" y="142" font-size="11" fill="#56657A">/ CPI</text>
+          <text x="900" y="142" font-size="22" font-weight="700" fill="#0B1525">0.97</text>
+          <text x="940" y="142" font-size="11" fill="#56657A">/ SPI</text>
+          <text x="820" y="160" font-size="10" fill="#B84507">{L.kpiCaption}</text>
+
+          <rect x="808" y="172" width="264" height="92" rx="10" fill="#fff" stroke="#E8EDF3"/>
+          <text x="820" y="194" font-size="10" fill="#56657A" font-weight="700">{L.progress}</text>
+          <polyline points="820,250 850,238 880,232 910,220 940,210 970,202 1000,188 1030,176 1060,170" fill="none" stroke="#FF7A1A" stroke-width="2"/>
+          <polyline points="820,250 850,242 880,236 910,228 940,222 970,216 1000,210 1030,206 1060,202" fill="none" stroke="#FFC97A" stroke-width="2" stroke-dasharray="3 3"/>
+          <text x="820" y="262" font-size="9" fill="#56657A">{L.progressCaption}</text>
+
+          <rect x="808" y="272" width="264" height="118" rx="10" fill="#fff" stroke="#E8EDF3"/>
+          <text x="820" y="294" font-size="10" fill="#56657A" font-weight="700">{L.risks}</text>
+          <rect x="820" y="302" width="6" height="22" fill="#E55F0A"/><text x="836" y="318" font-size="10" fill="#0B1525">R-07 Proveedor Y (alto)</text>
+          <rect x="820" y="328" width="6" height="22" fill="#FFA63D"/><text x="836" y="344" font-size="10" fill="#0B1525">R-14 Ley 1581 (medio · nuevo)</text>
+          <rect x="820" y="354" width="6" height="22" fill="#9BA9BC"/><text x="836" y="370" font-size="10" fill="#0B1525">R-11 Rotación (cerrado)</text>
+
+          <rect x="808" y="398" width="264" height="160" rx="10" fill="#0B1525"/>
+          <text x="820" y="420" font-size="10" font-weight="700" fill="#FFC97A">{L.nextArtifacts}</text>
+          <rect x="820" y="430" width="240" height="28" rx="6" fill="#1a2740"/>
+          <text x="832" y="448" font-size="10" fill="#fff">Status report viernes 22 — borrador listo</text>
+          <rect x="820" y="464" width="240" height="28" rx="6" fill="#1a2740"/>
+          <text x="832" y="482" font-size="10" fill="#fff">Minuta lunes 25 — pendiente firma sponsor</text>
+          <rect x="820" y="498" width="240" height="28" rx="6" fill="#1a2740"/>
+          <text x="832" y="516" font-size="10" fill="#fff">Re-baseline → flujo de aprobación PMI abierto</text>
+          <text x="820" y="546" font-size="9" fill="#9BA9BC" font-style="italic">{L.stealth}</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
