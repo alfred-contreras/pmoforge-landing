@@ -333,7 +333,7 @@ const en: typeof es = {
   },
   hero: {
     eyebrow: 'Coming soon · Early access',
-    title: 'Forge your PMO with AI agents that actually execute',
+    title: 'Forge your PMO with AI agents that actually execute',
     subtitle:
       'PMOforge equips the IT Project Manager with a team of hierarchical AI agents that automate governance, keep PMI/SAFe artifacts alive, and amplify decision-making — with ~50% less iteration time and no change to your culture.',
     ctaPrimary: 'Join the waitlist',
