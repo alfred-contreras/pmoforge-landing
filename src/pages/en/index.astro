@@ -4,6 +4,8 @@ import NavBar from '../../components/NavBar.astro';
 import Hero from '../../components/Hero.astro';
 import Problem from '../../components/Problem.astro';
 import Solution from '../../components/Solution.astro';
+import ValueProp from '../../components/ValueProp.astro';
+import Competitive from '../../components/Competitive.astro';
 import UseCases from '../../components/UseCases.astro';
 import Founder from '../../components/Founder.astro';
 import Waitlist from '../../components/Waitlist.astro';
@@ -26,6 +28,12 @@ const t = getContent(lang).meta;
     </Reveal>
     <Reveal client:load y={40}>
       <Solution lang={lang} />
+    </Reveal>
+    <Reveal client:load y={40}>
+      <ValueProp lang={lang} />
+    </Reveal>
+    <Reveal client:load y={40}>
+      <Competitive lang={lang} />
     </Reveal>
     <Reveal client:load y={40}>
       <UseCases lang={lang} />
