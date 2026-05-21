@@ -1,13 +1,17 @@
-# PMOforge — Landing v0.1
+# PMOforge — Landing v0.2.0
 
-Sitio comercial de **PMOforge**: SaaS de agentes IA jerárquicos para Gerentes de Proyectos IT, basado en OpenClaw.
+Sitio comercial de **PMOforge**: SaaS de coordinación multiagente para Directores PMO y Gerentes de Proyectos de TI.
+
+> Cambios y trazabilidad de releases en [`CHANGELOG.md`](./CHANGELOG.md). Versionado bajo Semantic Versioning 2.0.0 desde v0.2.0 (decisión D5 en el monorepo `pmforge`).
 
 ## Stack
 
 - Astro 5 (static output) + Tailwind CSS 3
 - i18n nativo de Astro (ES default, EN bajo `/en/`)
-- Inter Variable + Fraunces Variable
-- Sin React (todo Astro estático para máxima velocidad)
+- Inter Variable + Fraunces Variable (self-hosted vía `@fontsource-variable`)
+- Astro estático con islas React puntuales (`Reveal.tsx`, `MagneticButton.tsx`) hidratadas con `client:load` para animaciones Framer Motion
+- Lenis para smooth scroll
+- Vercel Analytics + Vercel Speed Insights para telemetría de visitas y Core Web Vitals
 
 ## Comandos
 
