@@ -8,6 +8,36 @@ Convención adoptada el 2026-05-20 (decisión D5 en `DECISIONS.md` del monorepo 
 
 ## [Unreleased]
 
+## [0.4.2] — 2026-05-21
+
+> Sección Fundador rediseñada: foto del fundador a la izquierda con encuadre profesional (opción C — tarjeta `rounded-2xl` + capa decorativa `ember-200` desplazada en diagonal para profundidad), layout reorganizado a 3 columnas (foto · texto · certificaciones) con `items-center` para simetría vertical. Título reescrito para no redundar con las certificaciones de la columna derecha.
+
+### Added
+
+- **Foto del fundador en `Founder.astro` (lado izquierdo, columna 3/12 en md+):** sirve `public/photo.jpg` (1302×1448, 392 KB) con `<img>` HTML estándar (no `<Image>` de Astro para evitar dependencia adicional en este ciclo). `aspect-[4/5]` + `object-cover` para portrait consistente. `loading="lazy"` y `decoding="async"` — la sección no es LCP. Atributo `alt` semántico bilingüe via `t.photoAlt`.
+- **Encuadre opción C — profundidad sin recargar:** capa decorativa `bg-ember-200 rounded-2xl` posicionada `absolute inset-0 translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4` detrás de la foto; foto al frente con `relative ring-1 ring-ink-100 shadow-xl rounded-2xl`. El offset diagonal de 12-16px genera la sensación de "doble capa" que el usuario pidió ("que no se vea tan plana").
+- **Campo nuevo `photoAlt` en `content.ts` (ES + EN):** "Retrato de Alfredo Contreras, fundador de PMOforge" / "Portrait of Alfredo Contreras, founder of PMOforge".
+
+### Changed
+
+- **Título de Founder reescrito** (ES y EN) para no redundar con las certificaciones de la card derecha (PMP/MBA/MIT xPRO/24+ años): "Construido por un PMP con 24 años entregando" → **"Dos décadas entregando proyectos. Ahora forjando la PMO del futuro."** (EN: "Two decades delivering projects. Now forging the PMO of the future."). Refuerza el verbo "forjar" alineado con la marca y desplaza el peso a la trayectoria + dirección futura, dejando las credenciales formales a la card.
+- **Body de Founder:** se eliminan las menciones redundantes a PMP/MBA/MIT xPRO del párrafo (ya están en la card derecha). Se preserva el storytelling de fundador ("frustración propia como Technical Owner") + el ámbito sectorial (Telco BSS, Oil & Gas, Gobierno) + la cifra de presupuestos (USD 10M+).
+- **Layout de Founder.astro reorganizado de 7+5 a 3+5+4 columnas** en md+: foto (3/12) + texto (5/12) + certificaciones (4/12). Wrapper con `items-center` para simetría vertical entre las tres columnas — la altura natural de la foto se acompasa con la altura del texto y de la card. `gap-8 md:gap-10` para respiración. En mobile las tres columnas hacen stack vertical con `max-w-[280px] mx-auto` para la foto.
+
+## [0.4.1] — 2026-05-21
+
+> Fix de navbar para evitar wrap de labels largos. Sin cambios funcionales ni de copy.
+
+### Fixed
+
+- **Navbar — labels largos hacían wrap a dos líneas y generaban desalineación vertical visible en pantallas `xl+` donde se mostraban los 9 items.** Causa: faltaba `whitespace-nowrap` en cada `<a>` y el `<nav>` estaba acotado a `max-w-6xl` (1152px), apretando los items contra el botón CTA. Fix integral:
+  - `whitespace-nowrap` aplicado a todos los links del navbar, al logo y al botón Waitlist.
+  - `flex-nowrap` explícito en el `<ul>` para reforzar que la lista no se rompe.
+  - `max-w-6xl` → `max-w-7xl` (1280px) en el wrapper del `<nav>` — 128px adicionales.
+  - Spacing entre items aumentado: `gap-5` → `gap-x-5 lg:gap-x-6`.
+  - `shrink-0` aplicado al logo y al grupo CTA (LANG + Waitlist) para protegerlos cuando el menú se aprieta.
+  - **Reorganización de breakpoints más conservadora:** `md+` muestra 4 items core (Solución, Diferencial, Seguridad, Visión) + CTA; `lg+` añade Problema; `xl+` añade Por qué PMOforge + Casos de uso + Fundador; `2xl+` añade Vista del producto. Antes 9 items intentaban entrar en `md+` con texto que hacía wrap.
+
 ## [0.4.0] — 2026-05-21
 
 > Dos secciones permanentes nuevas (Seguridad por diseño + Hacia dónde vamos), reescritura completa de la sección competitiva ("Diferencial") con tres celdas actualizadas según cierre de 04-Investigación de mercado v1.0 + sub-bloque "¿Y frente al PPM enterprise?" (Planview-Sciforma, ServiceNow SPM, Planisware, Forecast.app), reescritura del bloque "Frameworks PMI/SAFe rígidos" del Problem como "Gobernanza vs Agilidad: la fricción que mata el valor", roadmap visible más agresivo (junio 2026 demo funcional · jul–ago piloto remunerado · Q4 apertura comercial controlada). Cero filtraciones de Modo Stealth (sin nombres de modelos, providers, ni nombres de productos hermanos en exploración).
@@ -126,7 +156,9 @@ Despliegue público inicial de la landing PMOforge en Vercel (`pmoforge-landing.
 
 ---
 
-[Unreleased]: https://github.com/alfred-contreras/pmoforge-landing/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/alfred-contreras/pmoforge-landing/compare/v0.4.2...HEAD
+[0.4.2]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.4.2
+[0.4.1]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.4.1
 [0.4.0]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.4.0
 [0.3.0]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.3.0
 [0.2.0]: https://github.com/alfred-contreras/pmoforge-landing/releases/tag/v0.2.0

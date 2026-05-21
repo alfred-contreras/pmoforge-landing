@@ -362,9 +362,10 @@ const es = {
   },
   founder: {
     eyebrow: 'Quién está detrás',
-    title: 'Construido por un PMP con 24 años entregando',
+    title: 'Dos décadas entregando proyectos. Ahora forjando la PMO del futuro.',
     body:
-      'Soy Alfredo Contreras. PMP desde enero de 2010, MBA, MIT xPRO en AI Product Design. He liderado entregas en Telco (BSS), Oil & Gas y Gobierno con presupuestos anuales superiores a USD 10M. PMOforge nace de mi propia frustración como Technical Owner: necesitaba un copiloto que entendiera el lenguaje del PMI y respetara la cadencia ágil. Como no existía, lo estoy construyendo.',
+      'Soy Alfredo Contreras. He liderado entregas en Telco (BSS), Oil & Gas y Gobierno con presupuestos anuales superiores a USD 10M. PMOforge nace de mi propia frustración como Technical Owner: necesitaba un copiloto que entendiera el lenguaje del PMI y respetara la cadencia ágil. Como no existía, lo estoy construyendo.',
+    photoAlt: 'Retrato de Alfredo Contreras, fundador de PMOforge',
     cvLink: 'Ver mi hoja de vida completa',
     cvUrl: 'https://cv-alfredo-contreras.vercel.app/'
   },
@@ -745,9 +746,10 @@ const en: typeof es = {
   },
   founder: {
     eyebrow: 'Who is behind this',
-    title: 'Built by a PMP with 24 years of delivery',
+    title: 'Two decades delivering projects. Now forging the PMO of the future.',
     body:
-      'I’m Alfredo Contreras. PMP since January 2010, MBA, MIT xPRO in AI Product Design. I have led delivery in Telco (BSS), Oil & Gas, and Government, with annual budgets above USD 10M. PMOforge was born from my own frustration as a Technical Owner: I needed a copilot that understood PMI vocabulary and respected agile cadence. Since it didn’t exist, I’m building it.',
+      'I\'m Alfredo Contreras. I have led delivery in Telco (BSS), Oil & Gas, and Government, with annual budgets above USD 10M. PMOforge was born from my own frustration as a Technical Owner: I needed a copilot that understood PMI vocabulary and respected agile cadence. Since it didn\'t exist, I\'m building it.',
+    photoAlt: 'Portrait of Alfredo Contreras, founder of PMOforge',
     cvLink: 'See my full résumé',
     cvUrl: 'https://cv-alfredo-contreras.vercel.app/en'
   },
