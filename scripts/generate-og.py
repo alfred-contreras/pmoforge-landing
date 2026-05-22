@@ -63,21 +63,27 @@ COPY = {
         'h1_l1': 'Forja tu PMO con',
         'h1_l2': 'agentes IA que',
         'h1_l3': 'sí ejecutan',
-        'subtitle': 'Agentes jerárquicos sobre OpenClaw  ·  PMI / SAFe',
+        'subtitle': 'PMO agéntica  ·  Coordinación multi-agente  ·  PMI / SAFe',
         'cta': 'ACCESO ANTICIPADO',
-        'layer_command': 'MANDO',
-        'layer_supervision': 'SUPERVISIÓN',
-        'layer_operational': 'OPERATIVOS',
+        'layer_command': 'PM · CLIENTE',
+        'layer_supervision': 'COORDINACIÓN',
+        'layer_operational': 'AGENTES OPERATIVOS',
+        'node_command': 'PM',
+        'node_supervisor': 'Coordinador',
+        'nodes_operational': ['Cronograma', 'Finanzas', 'Riesgos', 'Status'],
     },
     'en': {
         'h1_l1': 'Forge your PMO with',
         'h1_l2': 'hierarchical AI',
         'h1_l3': 'agents that ship',
-        'subtitle': 'Agentic AI on OpenClaw  ·  PMI / SAFe ready',
+        'subtitle': 'Agentic PMO  ·  Multi-agent coordination  ·  PMI / SAFe',
         'cta': 'EARLY ACCESS',
-        'layer_command': 'COMMAND',
-        'layer_supervision': 'SUPERVISION',
-        'layer_operational': 'OPERATIONAL',
+        'layer_command': 'PM · CLIENT',
+        'layer_supervision': 'COORDINATION',
+        'layer_operational': 'OPERATIONAL AGENTS',
+        'node_command': 'PM',
+        'node_supervisor': 'Coordinator',
+        'nodes_operational': ['Schedule', 'Finance', 'Risks', 'Status'],
     },
 }
 
@@ -135,41 +141,48 @@ def make_image(out_path: Path, lang: str = 'es'):
     base_x = 720
     base_y = 130
 
-    # Capa 1 — Mando
+    # Capa 1 — PM Cliente
     draw_layer_box(d, base_x, base_y, 380, 90, t['layer_command'], INK_500)
     d.ellipse([(base_x + 160, base_y + 18), (base_x + 220, base_y + 78)], fill=ACCENT)
-    d.text((base_x + 175, base_y + 32), "PMP",
-           font=font(F_SANS_BOLD, 18), fill=WHITE)
+    cmd_font = font(F_SANS_BOLD, 22)
+    bbox = d.textbbox((0, 0), t['node_command'], font=cmd_font)
+    tw_cmd = bbox[2] - bbox[0]
+    d.text((base_x + 190 - tw_cmd / 2, base_y + 32), t['node_command'],
+           font=cmd_font, fill=WHITE)
 
-    # Conector
+    # Conector PM → Coordinador
     d.line([(base_x + 190, base_y + 90), (base_x + 190, base_y + 110)],
            fill=(204, 213, 224), width=2)
 
-    # Capa 2 — Supervisión
+    # Capa 2 — Coordinación
     draw_layer_box(d, base_x, base_y + 110, 380, 80, t['layer_supervision'], ACCENT_LIGHT)
-    d.rounded_rectangle(
-        [(base_x + 130, base_y + 140), (base_x + 250, base_y + 180)],
-        radius=8, fill=INK_700
+    coord_box = (base_x + 110, base_y + 140, base_x + 270, base_y + 180)
+    d.rounded_rectangle(coord_box, radius=8, fill=INK_700)
+    coord_font = font(F_SANS_BOLD, 15)
+    bbox = d.textbbox((0, 0), t['node_supervisor'], font=coord_font)
+    tw_coord = bbox[2] - bbox[0]
+    d.text(
+        (base_x + 190 - tw_coord / 2, base_y + 150),
+        t['node_supervisor'],
+        font=coord_font, fill=ACCENT_LIGHT,
     )
-    d.text((base_x + 152, base_y + 150), "Supervisor",
-           font=font(F_SANS_BOLD, 14), fill=ACCENT_LIGHT)
 
-    # Conectores
-    for tx in [base_x + 30, base_x + 130, base_x + 250, base_x + 350]:
-        d.line([(base_x + 190, base_y + 180), (tx, base_y + 230)],
+    # Conectores Coordinador → 4 operativos
+    for tx in [base_x + 50, base_x + 145, base_x + 240, base_x + 335]:
+        d.line([(base_x + 190, base_y + 180), (tx, base_y + 248)],
                fill=(204, 213, 224), width=1)
 
-    # Capa 3 — Operativos
+    # Capa 3 — Operativos (elipses horizontales para nombres largos)
     draw_layer_box(d, base_x, base_y + 215, 380, 110, t['layer_operational'], INK_500)
-    agents = [("RAID", base_x + 30), ("Status", base_x + 130),
-              ("Minuta", base_x + 250), ("Deps", base_x + 350)]
-    for label, ax in agents:
-        d.ellipse([(ax - 24, base_y + 252), (ax + 24, base_y + 300)],
+    node_centers = [base_x + 50, base_x + 145, base_x + 240, base_x + 335]
+    node_font = font(F_SANS_BOLD, 12)
+    for label, ax in zip(t['nodes_operational'], node_centers):
+        d.ellipse([(ax - 42, base_y + 252), (ax + 42, base_y + 300)],
                   outline=ACCENT, width=2, fill=WHITE)
-        bbox = d.textbbox((0, 0), label, font=font(F_SANS_BOLD, 12))
+        bbox = d.textbbox((0, 0), label, font=node_font)
         tw = bbox[2] - bbox[0]
-        d.text((ax - tw / 2, base_y + 270), label,
-               font=font(F_SANS_BOLD, 12), fill=INK_900)
+        d.text((ax - tw / 2, base_y + 269), label,
+               font=node_font, fill=INK_900)
 
     # Línea inferior decorativa
     d.line([(80, H - 30), (W - 80, H - 30)], fill=ACCENT, width=3)

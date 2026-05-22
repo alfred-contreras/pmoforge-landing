@@ -8,6 +8,23 @@ Convención adoptada el 2026-05-20 (decisión D5 en `DECISIONS.md` del monorepo 
 
 ## [Unreleased]
 
+## [0.4.4] — 2026-05-22
+
+> Regeneración de las imágenes Open Graph (`public/og.png` y `public/og-en.png`) para eliminar referencias a stack interno (Modo Stealth) y alinear el diagrama esquemático con el modelo de producto vigente. La imagen previa decía "Agentes jerárquicos sobre OpenClaw" y mostraba un esquema MANDO/SUPERVISIÓN/OPERATIVOS con nodos PMP/Supervisor/RAID/Status/Minuta/Deps que ya no corresponden a la arquitectura actual.
+
+### Changed
+
+- **Copy del og:image (ES y EN):** subtítulo `"Agentes jerárquicos sobre OpenClaw · PMI / SAFe"` → **"PMO agéntica · Coordinación multi-agente · PMI / SAFe"** (EN: `"Agentic AI on OpenClaw · PMI / SAFe ready"` → **"Agentic PMO · Multi-agent coordination · PMI / SAFe"**). Mismo cumplimiento de Modo Stealth que la landing: sin nombres de stack, providers ni arquitectura interna.
+- **Etiquetas de capa del esquema:** MANDO → **PM · CLIENTE** (EN: COMMAND → PM · CLIENT); SUPERVISIÓN → **COORDINACIÓN** (SUPERVISION → COORDINATION); OPERATIVOS → **AGENTES OPERATIVOS** (OPERATIONAL → OPERATIONAL AGENTS). Refleja el modelo del producto donde el PM cliente conversa con un único agente Coordinador que orquesta a los operacionales sobre un tablero compartido.
+- **Nodos del esquema:** Capa 1 PMP → **PM**; Capa 2 Supervisor → **Coordinador** (EN: Coordinator); Capa 3 RAID·Status·Minuta·Deps → **Cronograma · Finanzas · Riesgos · Status** (EN: Schedule · Finance · Risks · Status). Los 4 nodos seleccionados representan dominios PMI universalmente reconocibles a tamaño thumbnail; los 8 dominios completos del producto se ven en el hero al hacer clic.
+- **`scripts/generate-og.py` parametrizado:** los nombres de nodos de las tres capas (`node_command`, `node_supervisor`, `nodes_operational`) ahora se leen del diccionario `COPY` por idioma en lugar de estar hardcoded en el renderizador. Esto facilita futuras iteraciones de copy del og sin tocar lógica de dibujo.
+- **Ajustes de geometría del esquema:** caja del Coordinador ensanchada (160px vs 120px) y fuente subida a 15pt para acomodar "Coordinador/Coordinator" (palabras más largas que "Supervisor"); nodos operativos como elipses horizontales (84×48px) en lugar de círculos (48×48px) para acomodar etiquetas largas ("Cronograma", "Schedule") sin recorte; centros recalculados a `[50, 145, 240, 335]` con conectores realineados.
+
+### Operational
+
+- Script Pillow ejecutado en sandbox Ubuntu con fuentes Liberation/DejaVu del sistema; ambas imágenes regeneradas a 1200×627px (~50 KB cada una, dentro del límite recomendado de 300 KB para Open Graph). `og:image:width` y `og:image:height` en `Base.astro` quedan correctos sin tocar.
+- Render validado visualmente: ambas imágenes ya no contienen referencias al stack interno, el diagrama refleja el modelo de producto descrito en `product-vision.md` y el hero de la landing es coherente con lo que verá el visitante al hacer clic en el preview de redes.
+
 ## [0.4.3] — 2026-05-21
 
 > Dos cambios en una release: (a) fix del archivo `public/photo.jpg` que quedó untracked en v0.4.2; (b) ajuste de layout de la sección Founder por pedido del usuario — título y eyebrow pasan a full-width arriba, foto queda incrustada debajo del título al lado del párrafo.
