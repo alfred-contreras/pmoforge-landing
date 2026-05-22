@@ -8,6 +8,30 @@ Convención adoptada el 2026-05-20 (decisión D5 en `DECISIONS.md` del monorepo 
 
 ## [Unreleased]
 
+## [0.4.5] — 2026-05-22
+
+> Cierre del bucle de inspectores: tras regenerar `og:image` en v0.4.4 y refrescar caches en Meta Sharing Debugger y LinkedIn Post Inspector, LinkedIn marcó dos warnings rojos en su reporte (`No author found` y `No publication date found`). LinkedIn aplica heurísticas de clasificación que tratan a la URL como tipo "Article" aunque nuestro `og:type` declare "website", y bajo ese supuesto exige `article:author` + `article:published_time`. Agregamos los meta tags necesarios para que el reporte salga 100% verde a quien inspeccione la URL (relevante para outreach a Directores PMO / Sinapsa). Aprovechamos para bilingüizar `og:image:alt` que estaba hardcoded en inglés.
+
+### Added
+
+- **`<meta name="author" content="Alfredo Contreras" />`** — atributo de autoría a nivel `<head>` para que crawlers SEO y Post Inspectors detecten autor de la página. Mismo nombre en ES y EN (no se traduce). Resuelve warning de LinkedIn "No author found".
+- **`<meta property="article:author" content="Alfredo Contreras" />`** — duplicado en namespace Open Graph article para máxima compatibilidad (Meta debugger lee este; LinkedIn lee ambos). Misma constante `AUTHOR` declarada en el `<script>` frontmatter de `Base.astro`.
+- **`<meta property="article:published_time" content="2026-05-01T00:00:00Z" />`** — fecha conservadora del primer release público de la landing (cuando se hizo el primer deploy a Vercel). Constante `PUBLISHED_ISO`, no cambia en sucesivos releases.
+- **`<meta property="article:modified_time" content="2026-05-22T00:00:00Z" />`** — fecha del release actual (v0.4.5). Constante `MODIFIED_ISO` a sincronizar manualmente con CHANGELOG en cada cierre de versión. Documentado con comentario inline en `Base.astro` indicando la convención.
+- **`<meta name="twitter:image:alt" content={OG_IMAGE_ALT} />`** — alt text del og en card de Twitter/X, bilingüe.
+
+### Changed
+
+- **`og:image:alt` ahora bilingüe.** Antes hardcoded en EN: `"PMOforge — hierarchical AI agents for Agile PMOs"`. Ahora se calcula via constante `OG_IMAGE_ALT`:
+  - ES: `"PMOforge — PMO agéntica con coordinación multi-agente sobre tablero compartido"`
+  - EN: `"PMOforge — agentic PMO with multi-agent coordination over a shared board"`
+  Copy alineado con el subtítulo del og:image regenerado en v0.4.4. Mejora accesibilidad para lectores de pantalla y SEO multilingüe.
+
+### Operational
+
+- **Decisión tomada sobre warning `fb:app_id`:** ignorar. Es opcional para landings sin Facebook Insights ni Meta Ads. Si en el futuro se lanza pauta en Meta, se creará FB App y se agregará el tag en una línea (no es deuda crítica).
+- **Diagnóstico de "borrosidad" en preview de LinkedIn Post Inspector:** falso positivo. El thumbnail que renderiza el debugger interno es de baja calidad por diseño y no representa la imagen que verán los usuarios en el feed real. Imagen 1200×627 (50 KB) cumple el estándar OG y se renderiza correctamente en feeds de LinkedIn, Meta y Twitter. No se requiere reescalado.
+
 ## [0.4.4] — 2026-05-22
 
 > Regeneración de las imágenes Open Graph (`public/og.png` y `public/og-en.png`) para eliminar referencias a stack interno (Modo Stealth) y alinear el diagrama esquemático con el modelo de producto vigente. La imagen previa decía "Agentes jerárquicos sobre OpenClaw" y mostraba un esquema MANDO/SUPERVISIÓN/OPERATIVOS con nodos PMP/Supervisor/RAID/Status/Minuta/Deps que ya no corresponden a la arquitectura actual.
