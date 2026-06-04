@@ -378,6 +378,10 @@ const es = {
     emailPlaceholder: 'tu@correo.com',
     rolePlaceholder: 'Tu rol (PMP, PMO, Director IT…)',
     cta: 'Sumarme',
+    sending: 'Enviando…',
+    successTitle: 'Bienvenido a la lista.',
+    successBody: 'Te escribiremos en menos de 48 horas con el siguiente paso.',
+    errorMsg: 'No pudimos registrar tu solicitud. Inténtalo de nuevo o escríbenos a alfredoe.contreras@gmail.com.',
     privacy: 'Tu correo solo se usa para notificarte el lanzamiento. Sin spam.',
     or: 'o si prefieres conversar primero',
     bookCall: 'Agenda una llamada de 30 min'
@@ -762,6 +766,10 @@ const en: typeof es = {
     emailPlaceholder: 'you@email.com',
     rolePlaceholder: 'Your role (PMP, PMO, IT Director…)',
     cta: 'Count me in',
+    sending: 'Sending…',
+    successTitle: 'Welcome to the list.',
+    successBody: 'We will be in touch within 48 hours with next steps.',
+    errorMsg: 'We could not register your request. Please try again or write to alfredoe.contreras@gmail.com.',
     privacy: 'Your email is only used to notify you of launch. No spam.',
     or: 'or if you prefer to talk first',
     bookCall: 'Book a 30-minute call'
