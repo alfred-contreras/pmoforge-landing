@@ -1,0 +1,48 @@
+/* ─────────────────────────────────────────────────────────────────────────
+ * Forge Labs — fondo azul oscuro difuminado (casa madre)  [VENDORIZADO]
+ *
+ * Fuente de verdad: compartido/marca/forge-fondo.css del proyecto Empresa (holding),
+ * leído en SOLO LECTURA. Copia drop-in dentro de este repo porque `compartido/` vive
+ * en otro repositorio y no puede `@import`-arse cross-repo en el build de Astro.
+ * Si la spec del holding cambia, re-sincronizar este archivo (no editarlo a mano aquí).
+ *
+ * Hereda solo la ATMÓSFERA (fondo + glow). Tipografía y contenido los define PMOforge.
+ * ───────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --forge-ember: #ff7a1a;
+  --forge-ember-2: #ff9d4d;
+  --forge-ember-glow: rgba(255, 122, 26, 0.30);
+  --forge-cream: #fff6e5;
+  --forge-ink: #0b1525;     /* fondo base azul oscuro */
+  --forge-ink-2: #0e1a2e;   /* alternancia de secciones */
+  --forge-panel: #11203a;   /* tarjetas / paneles */
+  --forge-panel-2: #15274a;
+  --forge-border: rgba(255, 246, 229, 0.10);
+}
+
+/* Fondo base */
+.forge-bg { background: var(--forge-ink); color: #f3eee3; }
+.forge-section-alt { background: var(--forge-ink-2); }
+
+/* Atmósfera difuminada (el efecto del screenshot): capa de glow ember sobre el ink.
+ * Colocar .forge-hero-mesh como hijo absoluto dentro de un contenedor .forge-hero. */
+.forge-hero { position: relative; overflow: hidden; }
+.forge-hero > * { position: relative; z-index: 1; }
+.forge-hero-mesh {
+  position: absolute; inset: -20% -10% 0 -10%; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(38% 50% at 78% 18%, rgba(255, 122, 26, 0.20), transparent 62%),
+    radial-gradient(34% 48% at 12% 8%, rgba(255, 157, 77, 0.10), transparent 60%),
+    radial-gradient(46% 60% at 60% 90%, rgba(255, 246, 229, 0.05), transparent 65%);
+  animation: forge-drift 18s ease-in-out infinite alternate;
+}
+@keyframes forge-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-2%, -2%, 0) scale(1.06); }
+}
+@media (prefers-reduced-motion: reduce) { .forge-hero-mesh { animation: none; } }
+
+/* Glow-border opcional en tarjetas al hover (coherencia con la casa madre) */
+.forge-glow { border: 1px solid var(--forge-border); transition: border-color .15s, box-shadow .15s, transform .15s; }
+.forge-glow:hover { border-color: rgba(255, 122, 26, 0.45); box-shadow: 0 0 0 1px var(--forge-ember-glow), 0 20px 55px rgba(0, 0, 0, 0.4); transform: translateY(-2px); }

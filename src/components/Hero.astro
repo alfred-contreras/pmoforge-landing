@@ -32,23 +32,24 @@ const bullets = lang === 'en'
     ];
 ---
 
-<section class="relative overflow-hidden">
+<section class="forge-hero relative overflow-hidden">
+  <div class="forge-hero-mesh" aria-hidden="true"></div>
   <div class="max-w-6xl mx-auto px-5 pt-3 pb-16 md:pt-4 md:pb-24">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
 
       <!-- LEFT: copy con bullets para simetría en altura con la imagen -->
       <div class="lg:col-span-5">
         <span class="eyebrow">{t.eyebrow}</span>
-        <h1 class="mt-4 text-4xl md:text-5xl xl:text-6xl font-bold leading-[1.05] text-ink-900">
+        <h1 class="mt-4 text-4xl md:text-5xl xl:text-6xl font-bold leading-[1.05] text-cream">
           {t.title}
         </h1>
-        <p class="mt-5 text-lg text-ink-700 max-w-xl">
+        <p class="mt-5 text-lg text-mute max-w-xl">
           {t.subtitle}
         </p>
 
         <ul class="hero-bullets mt-6 space-y-2.5">
           {bullets.map((b) => (
-            <li class="flex items-start gap-3 text-ink-700 leading-relaxed">
+            <li class="flex items-start gap-3 text-mute leading-relaxed">
               <svg class="hero-bullet-icon mt-0.5 flex-shrink-0" viewBox="0 0 20 20"
                    width="20" height="20" fill="none" stroke="currentColor"
                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -110,8 +111,8 @@ const bullets = lang === 'en'
     border-radius: 22px;
     overflow: hidden;
     box-shadow:
-      0 30px 60px -30px rgba(11, 21, 37, 0.25),
-      0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+      0 40px 80px -30px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(255, 246, 229, 0.12) inset;
   }
   .hero-arch-img {
     display: block;
