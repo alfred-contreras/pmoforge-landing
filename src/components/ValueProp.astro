@@ -10,17 +10,17 @@ const t = getContent(lang).valueProp;
 <section id="value" class="relative">
   <div class="max-w-6xl mx-auto px-5 py-20">
     <span class="eyebrow">{t.eyebrow}</span>
-    <h2 class="mt-3 text-3xl md:text-4xl font-bold text-ink-900 max-w-3xl leading-tight">
+    <h2 class="mt-3 text-3xl md:text-4xl font-bold text-cream max-w-3xl leading-tight">
       {t.title}
     </h2>
-    <p class="mt-5 text-lg text-ink-700 max-w-3xl leading-relaxed">{t.lead}</p>
+    <p class="mt-5 text-lg text-mute max-w-3xl leading-relaxed">{t.lead}</p>
 
     <div class="mt-12 grid md:grid-cols-2 gap-5">
       {t.pillars.map((pillar) => (
         <article class="card flex flex-col gap-3">
           <div class="flex items-center gap-3">
             <span
-              class="inline-grid place-items-center w-12 h-12 rounded-xl bg-ink-900 text-ember-200 shadow-sm"
+              class="inline-grid place-items-center w-12 h-12 rounded-xl bg-white/5 text-ember-200 shadow-sm"
               aria-hidden="true"
             >
               {pillar.iconKey === 'memory' && (
@@ -56,20 +56,20 @@ const t = getContent(lang).valueProp;
                 </svg>
               )}
             </span>
-            <span class="text-xs font-semibold uppercase tracking-wider text-ember-700">
+            <span class="text-xs font-semibold uppercase tracking-wider text-ember-400">
               {pillar.label}
             </span>
           </div>
-          <h3 class="font-serif font-bold text-xl text-ink-900 leading-snug">
+          <h3 class="font-serif font-bold text-xl text-cream leading-snug">
             {pillar.title}
           </h3>
-          <p class="text-ink-900 font-medium leading-snug">{pillar.claim}</p>
-          <p class="text-ink-700 leading-relaxed">{pillar.body}</p>
+          <p class="text-paper font-medium leading-snug">{pillar.claim}</p>
+          <p class="text-mute leading-relaxed">{pillar.body}</p>
         </article>
       ))}
     </div>
 
-    <p class="mt-10 max-w-3xl text-ink-700 leading-relaxed italic border-l-2 border-ember-500 pl-4">
+    <p class="mt-10 max-w-3xl text-mute leading-relaxed italic border-l-2 border-ember-500 pl-4">
       {t.closer}
     </p>
   </div>

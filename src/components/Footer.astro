@@ -8,13 +8,13 @@ const t = getContent(lang).footer;
 const cvUrl = lang === 'en' ? 'https://cv-alfredo-contreras.vercel.app/en' : 'https://cv-alfredo-contreras.vercel.app/';
 ---
 
-<footer class="border-t border-ink-100 bg-white">
-  <div class="max-w-6xl mx-auto px-5 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-ink-500">
+<footer class="border-t border-white/10 bg-forge-ink2">
+  <div class="max-w-6xl mx-auto px-5 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-mute">
     <p class="font-serif italic">{t.tagline}</p>
     <div class="flex items-center gap-5">
-      <a href={cvUrl} target="_blank" rel="noopener" class="hover:text-ember-600">{t.cv}</a>
-      <a href={`mailto:${contactEmail}`} class="hover:text-ember-600">{t.contact}</a>
-      <a href="https://www.linkedin.com/in/aecontreras707/" target="_blank" rel="noopener" class="hover:text-ember-600">LinkedIn</a>
+      <a href={cvUrl} target="_blank" rel="noopener" class="hover:text-ember-400">{t.cv}</a>
+      <a href={`mailto:${contactEmail}`} class="hover:text-ember-400">{t.contact}</a>
+      <a href="https://www.linkedin.com/in/aecontreras707/" target="_blank" rel="noopener" class="hover:text-ember-400">LinkedIn</a>
     </div>
     <p>{t.builtBy}</p>
   </div>
