@@ -29,7 +29,7 @@ h1, h2, h3 {
  * sobre-escribir los defaults por tarjeta/sección sin pelear por orden de origen. */
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center gap-2 rounded-xl bg-ember-500 px-5 py-3 font-semibold text-white shadow-lg shadow-ember-500/30 transition-all duration-300 hover:bg-ember-600 active:scale-[0.98];
+    @apply inline-flex items-center gap-2 rounded-xl bg-ember-500 px-5 py-3 font-semibold text-[#150a00] shadow-lg shadow-ember-500/30 transition-all duration-300 hover:bg-ember-600 active:scale-[0.98];
     position: relative;
     overflow: hidden;
   }
